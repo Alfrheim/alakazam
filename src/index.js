@@ -4,7 +4,7 @@
       Sprite = PIXI.Sprite,
       TextureCache = PIXI.utils.TextureCache;*/
 
-const app = new PIXI.Application({width: 600,
+const app = new PIXI.Application({width: 1200,
                                   height: 600,
                                   antialias: true,
                                   transparent: false,
