@@ -1,8 +1,8 @@
-const Application = PIXI.Application,
+/*const Application = PIXI.Application,
       loader = PIXI.loader,
       resources = PIXI.loader.resources,
       Sprite = PIXI.Sprite,
-      TextureCache = PIXI.utils.TextureCache;
+      TextureCache = PIXI.utils.TextureCache;*/
 
 const app = new PIXI.Application({width: 600,
                                   height: 600,
@@ -17,10 +17,9 @@ if(!PIXI.utils.isWebGLSupported()){
     type = "canvas";
 }
 
-loader
-    .add(
-        "images/hero.json"
-    )
+PIXI.loader
+    .add("images/wizard.json")
+    .add("images/fireplace.png")
     .on("progress", loadProgressHandler)
     .load(setup);
 
@@ -28,11 +27,17 @@ function loadProgressHandler(resource) {
     console.log("loading: " + resource.url); 
 
     //Display the percentage of files currently loaded
-    console.log("progress: " + loader.progress + "%"); 
+    console.log("progress: " + PIXI.loader.progress + "%"); 
 }
 function setup() {
     console.log("setup");
-    app.renderer.render(app.stage);
+
+    const wizard = new PIXI.Sprite(PIXI.loader.resources["images/wizard.json"].textures["wizard-walk1"]);
+    const backgound = new PIXI.Sprite(PIXI.loader.resources["images/fireplace.png"].texture);
+    wizard.x = 0;
+    wizard.y = 0;
+    app.stage.addChild(backgound);
+    app.stage.addChild(wizard);
     app.ticker.add(delta => gameLoop(delta));
 }
 
