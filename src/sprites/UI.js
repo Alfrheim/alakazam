@@ -25,6 +25,12 @@ function createUI(displayGroup, container) {
                     bookPage.addChild(todoText);
                 });
 
+            if (quests.allTranslated()) {
+                let finalText = new PIXI.Text("Ueeeeee",{fontFamily : 'Verdana', fontSize: 24, fill : 0xff1010, align : 'center', strokeThickness: 10} );
+                finalText.x = 210;
+                finalText.y = todoTextY + 50;
+                bookPage.addChild(finalText);
+            }
             container.addChild(bookPage);
         } else {
             container.removeChild(bookPage);

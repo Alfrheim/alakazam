@@ -10,6 +10,7 @@ class InteractiveItem extends PIXI.Sprite {
     interactWith(eventData) {
         eventData.target.visible = false;
         quests.quests[eventData.target.quest].isDiscovered = true;
+        quests.translatedQuests++;
     }
 }
 
