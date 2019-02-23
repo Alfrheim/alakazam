@@ -50,10 +50,11 @@ function setup() {
     room1.background.on('pointerdown', onClickWalk);
     room1.addInteractiveItem("images/chest.png", 500, 500, "This is a chest");
     room1.addInteractiveItem("images/book-fireplace.png", 100, 100, "this is a book");
+    room1.addWall("room2","room0"); //TODO: this should not be text
     room1.render();
-    setTimeout(() => {
+    /*setTimeout(() => {
         room1.remove()
-    }, 5000)
+    }, 5000)*/
     //we now show here the background and items. Order matters
     createUI(uiDisplayGroup, mainContainer);
 
