@@ -41,11 +41,21 @@ module.exports = {
             } 
          },
          {
-            test: /\.(png|svg|jpg|gif|ttf)$/,
+            test: /\.(png|svg|jpg|gif)$/,
             use: [
                'file-loader'
             ]
-         }
+         },
+         {
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader'],
+          },
+          { 
+             test: /\.(woff|woff2|eot|ttf)$/,
+             use: [
+               'url-loader?limit=100000'
+            ]
+          }
       ]
    },
    plugins: [
