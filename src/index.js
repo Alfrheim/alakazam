@@ -46,7 +46,11 @@ function setup() {
     var backgroundDisplayGroup = new PIXI.display.Group(-1, false);
     app.stage.addChild(new PIXI.display.Layer(backgroundDisplayGroup));
 
-    var uiDisplayGroup = new PIXI.display.Group(1, false);
+
+    var wizardDisplayGroup = new PIXI.display.Group(5, false);
+    app.stage.addChild(new PIXI.display.Layer(wizardDisplayGroup));
+
+    var uiDisplayGroup = new PIXI.display.Group(10, false);
     app.stage.addChild(new PIXI.display.Layer(uiDisplayGroup));
 
     const room = createRooms(backgroundDisplayGroup, mainContainer);
@@ -66,7 +70,7 @@ function setup() {
     //we now show here the background and items. Order matters
     createUI(uiDisplayGroup, mainContainer);
 
-    wizard = new Wizard("images/wizard.json", backgroundDisplayGroup, mainContainer);
+    wizard = new Wizard("images/wizard.json", wizardDisplayGroup, mainContainer);
 
     //const chest = createChest(backgroundDisplayGroup, mainContainer);
 
