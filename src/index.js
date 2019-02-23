@@ -36,7 +36,7 @@ function setup() {
 
     const backgound = new PIXI.Sprite(PIXI.loader.resources["images/fireplace.png"].texture);   //the background is resource, so we can call it as such
     backgound.interactive = true;       //we indicate that we will interact with this sprite
-    backgound.on('pointerdown', onClickWalk);   //when click, walk
+    backgound.on('pointerdown', onClickWalk);   //when click, walk. Function is here a bit down
 
     var backgroundDisplayGroup = new PIXI.display.Group(-1, false);
     app.stage.addChild(new PIXI.display.Layer(backgroundDisplayGroup));
@@ -44,6 +44,7 @@ function setup() {
     var uiDisplayGroup = new PIXI.display.Group(1, false);
     app.stage.addChild(new PIXI.display.Layer(uiDisplayGroup));
 
+    //we now show here the background and items. Order matters
     createUI(app, uiDisplayGroup, mainContainer);
 
     backgound.parentGroup = backgroundDisplayGroup;
@@ -58,6 +59,7 @@ function setup() {
     //app.stage.interactive = true;
     //app.stage.on('pointerdown', onClickWalk);
 
+    //we create the "clock" with delta value, that will refresh the stuff
     app.ticker.add(delta => gameLoop(delta));
 
 }
