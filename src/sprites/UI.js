@@ -1,7 +1,7 @@
 const DEFAULT_BOOK_X = 10;
 const DEFAULT_BOOK_Y = 530;
 
-function createUI(app, uiDisplayGroup, mainContainer) {
+function createUI(displayGroup, container) {
 
     const bookUI = new PIXI.Sprite(PIXI.loader.resources["images/book.png"].texture);
     bookUI.x = DEFAULT_BOOK_X;
@@ -9,15 +9,15 @@ function createUI(app, uiDisplayGroup, mainContainer) {
     bookUI.interactive = true;
     bookUI.on('pointerdown', () => {
         let text = new PIXI.Text('This is a pixi text',{fontFamily : 'Arial', fontSize: 24, fill : 0xff1010, align : 'center'});
-        text.parentGroup = uiDisplayGroup;
+        text.parentGroup = displayGroup;
 
-        mainContainer.addChild(text);
+        container.addChild(text);
 
         console.log("show menu");
     });
 
-    bookUI.parentGroup = uiDisplayGroup;
-    mainContainer.addChild(bookUI);
+    bookUI.parentGroup = displayGroup;
+    container.addChild(bookUI);
     return bookUI;
 }
 

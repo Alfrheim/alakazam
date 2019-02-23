@@ -45,7 +45,7 @@ function setup() {
     app.stage.addChild(new PIXI.display.Layer(uiDisplayGroup));
 
     //we now show here the background and items. Order matters
-    createUI(app, uiDisplayGroup, mainContainer);
+    createUI(uiDisplayGroup, mainContainer);
 
     backgound.parentGroup = backgroundDisplayGroup;
     mainContainer.addChild(backgound);
