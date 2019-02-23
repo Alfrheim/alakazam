@@ -4,7 +4,7 @@ class Quests {
 
     constructor(args) {
         this.quests = [
-            new Quest(1, "Find a blue potion", true),
+            new Quest(1, "Find a blue potion", false),
             new Quest(2, "Not Implemented", false),
             new Quest(3, "Not Implemented", false),
             new Quest(4, "Not Implemented", false),
