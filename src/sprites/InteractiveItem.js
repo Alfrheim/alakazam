@@ -11,6 +11,14 @@ class InteractiveItem extends PIXI.Sprite {
         eventData.target.visible = false;
         quests.quests[eventData.target.quest].isDiscovered = true;
         quests.translatedQuests++;
+
+        var sound = new Howl({
+            src: ['media/escriureRapid.wav'],
+            //src: ['media/escriureLent.wav'],
+            autoplay: true,
+            loop: false,
+            volume: 3,
+          });
     }
 }
 
