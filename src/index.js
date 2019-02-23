@@ -1,6 +1,7 @@
 import Wizard from '@/sprites/Wizard';
 import createUI from '@/sprites/UI';
 import createChest from '@/sprites/Chest';
+import Room from '@/Room';
 PIXI_LAYERS;
 
 const app = new PIXI.Application({width: 800,
