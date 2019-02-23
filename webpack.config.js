@@ -60,7 +60,7 @@ module.exports = {
    },
    plugins: [
       new HtmlWebpackPlugin({
-         title: 'Pixi.js'
+         title: 'Alakazam'
       }),
       new webpack.ProvidePlugin({
           PIXI_LAYERS: 'pixi-layers/dist/pixi-layers.js',
