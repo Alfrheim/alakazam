@@ -1,4 +1,4 @@
-import createWizard from '@/sprites/Wizard';
+import Wizard from '@/sprites/Wizard';
 import createUI from '@/sprites/UI';
 import createChest from '@/sprites/Chest';
 PIXI_LAYERS;
@@ -11,11 +11,10 @@ const app = new PIXI.Application({width: 800,
 
 document.body.appendChild(app.view);
 
-const walkingSpeed = 5;
-let speed = 0;
-let clickX = 0;
-let wizard;
+let clickX = 0;     //global variable to store direction of walking +/-
+let wizard;        //global variable where we will store class of wizard
 
+//we load here all images to catch them
 PIXI.loader
     .add("images/wizard.json")
     .add("images/fireplace.png")
@@ -34,7 +33,9 @@ function setup() {
     var mainContainer = new PIXI.Container();
     app.stage.addChild(mainContainer);
 
-    const backgound = new PIXI.Sprite(PIXI.loader.resources["images/fireplace.png"].texture);
+    const backgound = new PIXI.Sprite(PIXI.loader.resources["images/fireplace.png"].texture);   //the background is resource, so we can call it as such
+    backgound.interactive = true;       //we indicate that we will interact with this sprite
+    backgound.on('pointerdown', onClickWalk);   //when click, walk
 
     var backgroundDisplayGroup = new PIXI.display.Group(-1, false);
     app.stage.addChild(new PIXI.display.Layer(backgroundDisplayGroup));
@@ -47,43 +48,25 @@ function setup() {
     backgound.parentGroup = backgroundDisplayGroup;
     mainContainer.addChild(backgound);
 
-    wizard = createWizard(backgroundDisplayGroup, mainContainer);
+    wizard = new Wizard("images/wizard.json", backgroundDisplayGroup, mainContainer);
 
     const chest = createChest(backgroundDisplayGroup, mainContainer);
 
 
-    app.stage.hitArea = new PIXI.Rectangle(0, 0, app.renderer.width, app.renderer.height);
-    app.stage.interactive = true;
-    app.stage.on('pointerdown', onClickWalk);
+    //app.stage.hitArea = new PIXI.Rectangle(0, 0, app.renderer.width, app.renderer.height);
+    //app.stage.interactive = true;
+    //app.stage.on('pointerdown', onClickWalk);
 
     app.ticker.add(delta => gameLoop(delta));
 
 }
 
 function gameLoop(delta) {
-    if ((speed < 0 && clickX >= wizard.x) || (speed > 0 && clickX <= wizard.x))  {
-        wizard.stop();
-        speed = 0;
-    } else if (speed != 0) {
-        wizard.x += speed;
-    }
+    wizard.checkWizardWalk(clickX);
 }
 
 function onClickWalk () {
     let click = app.renderer.plugins.interaction.mouse.global;
     clickX = click.x;
-    let compareX = wizard.x;
-    
-    if (speed == 0) {
-        wizard.play();
-    }
-
-    if (clickX < compareX) {
-        speed = -1 * walkingSpeed;
-    } else if (clickX > compareX) {
-        speed = walkingSpeed; 
-    } else {
-        speed = walkingSpeed;
-    } 
-        
+    wizard.walk(clickX);  
 }
