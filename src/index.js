@@ -1,4 +1,5 @@
 import Wizard from '@/sprites/Wizard';
+import Countdown from '@/Countdown';
 import createUI from '@/sprites/UI';
 import createRooms from '@/roomManager';
 import '@/css/index.css'
@@ -19,6 +20,8 @@ document.body.appendChild(app.view);
 
 let clickX = 0;     //global variable to store direction of walking +/-
 let wizard;        //global variable where we will store class of wizard
+let currentRoom     //global variable to know in what room we are currently
+let countDown;
 
 //we load here all images to catch them
 PIXI.loader
@@ -66,6 +69,7 @@ function setup() {
     createUI(uiDisplayGroup, mainContainer);
 
     wizard = new Wizard("images/wizard.json", wizardDisplayGroup, mainContainer);
+    countDown = new Countdown(uiDisplayGroup, mainContainer);
 
     //we create the "clock" with delta value, that will refresh the stuff
     app.ticker.add(delta => gameLoop(delta));
@@ -79,6 +83,7 @@ function setup() {
 
 function gameLoop(delta) {
     wizard.checkWizardWalk(clickX);
+    countDown.refresh();
 }
 
 function onClickWalk () {
