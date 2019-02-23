@@ -49,9 +49,9 @@ function setup() {
     var uiDisplayGroup = new PIXI.display.Group(1, false);
     app.stage.addChild(new PIXI.display.Layer(uiDisplayGroup));
 
-    const rooms = createRooms(backgroundDisplayGroup, mainContainer);
-    rooms[currentRoom].background.on('pointerdown', onClickWalk);
-    rooms[currentRoom].render();
+    const room = createRooms(backgroundDisplayGroup, mainContainer);
+    room.background.on('pointerdown', onClickWalk);
+    room.render();
 
     /*const room1 = new Room("images/fireplace.png", mainContainer, backgroundDisplayGroup);
     room1.background.on('pointerdown', onClickWalk);

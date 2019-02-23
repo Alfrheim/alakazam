@@ -55,8 +55,16 @@ class Room {
         leftWall.mouseout = function(mouseData) {
             this.alpha = 0.5;
         }
-        //TODO
-        /*if (clicked)   { remove room and go to left or rightRoom}*/
+
+        leftWall.on('pointerdown', this.goToRoom(leftRoom));
+        rightWall.on('pointerdown', this.goToRoom(rightRoom));
+    }
+
+    goToRoom(nextRoom)
+    {
+        console.log("removeeeee");
+        this.remove();
+        nextRoom.render();
     }
 
     render() {
