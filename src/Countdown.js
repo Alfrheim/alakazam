@@ -10,7 +10,8 @@ class Countdown {
         container.addChild(this.clock);
     }
     refresh() {
-        this.clock.text = this.timer - new Date().getTime();
+        const timeLeft = this.timer - new Date().getTime();
+        this.clock.text = (timeLeft < 280000 ? timeLeft : timeLeft / 1000 | 0);
     }
 }
 
