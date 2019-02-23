@@ -1,3 +1,6 @@
+import InventoryItem from '@/sprites/InventoryItem';
+import InteractiveItem from '@/sprites/InteractiveItem';
+
 class Room {
     constructor(backgroundResource, mainContainer, displayGroup) {
         this.background = new PIXI.Sprite(PIXI.loader.resources[backgroundResource].texture);
@@ -5,16 +8,27 @@ class Room {
         this.container = mainContainer;
         this.displayGroup = displayGroup;
         this.interactiveItems = [];
+        //com que fem servir la funció goToRoom amb un event, el "this" es sobreescriu... peró fent bind ho solucionem
+        this.goToRoom = this.goToRoom.bind(this);
     }
 
-    addInteractiveItem(itemResource, posX, posY, itemDescription) {
-        let item = new PIXI.Sprite(PIXI.loader.resources[itemResource].texture);
+    addInteractiveItem(itemResource, posX, posY, itemDescription, isInventory = true) {
+        let item
+        if (isInventory) {
+            item = new InventoryItem(itemDescription, itemDescription, PIXI.loader.resources[itemResource].texture);
+        } else {
+            item = new InteractiveItem(itemDescription, itemDescription, PIXI.loader.resources[itemResource].texture);
+        }
         item.x = posX;
         item.y = posY;
         item.description = itemDescription;
         item.buttonMode = true;
         item.interactive = true;
         this.interactiveItems.push(item);
+    }
+
+    removeInteractiveItem(item) {
+        
     }
     
     addWall (rightRoom, leftRoom){
@@ -28,6 +42,7 @@ class Room {
         rightWall.buttonMode = true;
         rightWall.hitArea = new PIXI.Rectangle(800-30, 0, 30, 600);   //expandir a la mateixa area del rectangle
         this.interactiveItems.push(rightWall);
+        rightWall.nextRoom = rightRoom;
         //makes circle non-transparent when mouse over
         rightWall.mouseover = function(mouseData) {
             this.alpha = 0.5;
@@ -47,6 +62,7 @@ class Room {
         leftWall.buttonMode = true;
         leftWall.hitArea = new PIXI.Circle(10, 300, 10);
         this.interactiveItems.push(leftWall);
+        leftWall.nextRoom = leftRoom;
         //makes circle non-transparent when mouse over
         leftWall.mouseover = function(mouseData) {
             this.alpha = 1;
@@ -56,15 +72,8 @@ class Room {
             this.alpha = 0.5;
         }
 
-        leftWall.on('pointerdown', this.goToRoom(leftRoom));
-        rightWall.on('pointerdown', this.goToRoom(rightRoom));
-    }
-
-    goToRoom(nextRoom)
-    {
-        console.log("removeeeee");
-        this.remove();
-        nextRoom.render();
+        leftWall.on('pointerdown', this.goToRoom);
+        rightWall.on('pointerdown', this.goToRoom);
     }
 
     render() {
@@ -78,7 +87,12 @@ class Room {
     }
 
     remove() {
-        this.container.removeChild(this.background)
+        this.container.removeChild(this.background);
+    }
+
+    goToRoom(eventData) {
+        this.remove();
+        eventData.target.nextRoom.render();
     }
 }
 export default Room;
