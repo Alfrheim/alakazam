@@ -11,9 +11,10 @@ const app = new PIXI.Application({width: 800,
 
 document.body.appendChild(app.view);
 
-let clickX = 0;
-let wizardC;
+let clickX = 0;     //global variable to store direction of walking +/-
+let wizardC;        //global variable where we will store class of wizard
 
+//we load here all images to catch them
 PIXI.loader
     .add("images/wizard.json")
     .add("images/fireplace.png")
@@ -29,9 +30,9 @@ function loadProgressHandler(resource) {
 function setup() {
     console.log("setup");
 
-    const backgound = new PIXI.Sprite(PIXI.loader.resources["images/fireplace.png"].texture);
-    backgound.interactive = true;
-    backgound.on('pointerdown', onClickWalk);
+    const backgound = new PIXI.Sprite(PIXI.loader.resources["images/fireplace.png"].texture);   //the background is resource, so we can call it as such
+    backgound.interactive = true;       //we indicate that we will interact with this sprite
+    backgound.on('pointerdown', onClickWalk);   //when click, walk
 
     const book = new PIXI.Sprite(PIXI.loader.resources["images/book.png"].texture);
 
