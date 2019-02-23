@@ -1,13 +1,11 @@
-
-
 const DEFAULT_X = 100;
 const DEFAULT_Y = 400;
-const DEFAULT_ANIMATION_SPEED = 0.4;
-const DEFAULT_WALKING_SPEED = 5;
+const DEFAULT_ANIMATION_SPEED = 0.4;    //how it moves "the feet"
+const DEFAULT_WALKING_SPEED = 5;        //how fast it moves in regards of the background
 
 class Wizard {
     
-    constructor(resourceName) {
+    constructor(resourceName, displayGroup, container) {
         this.speed = 0;
 
         const sheet = PIXI.loader.resources[resourceName].spritesheet;
@@ -15,6 +13,9 @@ class Wizard {
         this.wizard.animationSpeed = DEFAULT_ANIMATION_SPEED;
         this.wizard.x = DEFAULT_X;
         this.wizard.y = DEFAULT_Y;
+
+        this.wizard.parentGroup = displayGroup;
+        container.addChild(this.wizard);
     }
 
     checkWizardWalk(clickX) {
