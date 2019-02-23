@@ -60,13 +60,17 @@ module.exports = {
    },
    plugins: [
       new HtmlWebpackPlugin({
-         title: 'Alakazam'
+         title: 'Pixi.js'
       }),
       new webpack.ProvidePlugin({
           PIXI_LAYERS: 'pixi-layers/dist/pixi-layers.js',
           PIXI: 'pixi.js'
       }),
-      new CopyWebpackPlugin([{ from: './src/images', to: 'images' }]),
+      new CopyWebpackPlugin([
+         { from: './src/images', to: 'images' },
+         { from: './src/fonts', to: 'fonts' },
+          { from: './src/media', to: 'media' }
+      ]),
       new CleanWebpackPlugin(['dist']),
    ]
 }
