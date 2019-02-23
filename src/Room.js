@@ -1,7 +1,9 @@
 class Room {
-    constructor(backgroundResource) {
+    constructor(backgroundResource, mainContainer, displayGroup) {
         this.background = new PIXI.Sprite(PIXI.loader.resources[backgroundResource].texture);
         this.background.interactive = true;
+        this.container = mainContainer;
+        this.displayGroup = displayGroup;
         this.interactiveItems = [];
     }
 
@@ -15,14 +17,18 @@ class Room {
         this.interactiveItems.push(item);
     }
 
-    addToContainer(displayGroup, mainContainer) {
-        this.background.parentGroup = displayGroup;
-        mainContainer.addChild(this.background);
+    render() {
+        this.background.parentGroup = this.displayGroup;
+        this.container.addChild(this.background);
 
         this.interactiveItems.forEach(element => {
-            element.parentGroup = displayGroup;
-            mainContainer.addChild(element);
+            element.parentGroup = this.displayGroup;
+            this.background.addChild(element);
         });
+    }
+
+    remove() {
+        this.container.removeChild(this.background)
     }
 }
 export default Room;

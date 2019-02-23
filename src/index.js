@@ -36,11 +36,6 @@ function setup() {
     var mainContainer = new PIXI.Container();
     app.stage.addChild(mainContainer);
 
-    const habitacio_1 = new Room("images/fireplace.png");
-    habitacio_1.background.on('pointerdown', onClickWalk);
-    habitacio_1.addInteractiveItem("images/chest.png", 500, 500, "This is a chest");
-    habitacio_1.addInteractiveItem("images/book-fireplace.png", 100, 100, "this is a book");
-
     //const backgound = new PIXI.Sprite(PIXI.loader.resources["images/fireplace.png"].texture);   //the background is resource, so we can call it as such
     //backgound.interactive = true;       //we indicate that we will interact with this sprite
     //backgound.on('pointerdown', onClickWalk);   //when click, walk. Function is here a bit down
@@ -51,8 +46,14 @@ function setup() {
     var uiDisplayGroup = new PIXI.display.Group(1, false);
     app.stage.addChild(new PIXI.display.Layer(uiDisplayGroup));
 
-    habitacio_1.addToContainer(backgroundDisplayGroup, mainContainer);
-    
+    const room1 = new Room("images/fireplace.png", mainContainer, backgroundDisplayGroup);
+    room1.background.on('pointerdown', onClickWalk);
+    room1.addInteractiveItem("images/chest.png", 500, 500, "This is a chest");
+    room1.addInteractiveItem("images/book-fireplace.png", 100, 100, "this is a book");
+    room1.render();
+    setTimeout(() => {
+        room1.remove()
+    }, 5000)
     //we now show here the background and items. Order matters
     createUI(uiDisplayGroup, mainContainer);
 
