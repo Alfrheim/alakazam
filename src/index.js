@@ -1,4 +1,4 @@
-import createWizard from '@/sprites/Wizard';
+import Wizard from '@/sprites/Wizard';
 import createUI from '@/sprites/UI';
 import createChest from '@/sprites/Chest';
 PIXI_LAYERS;
@@ -34,7 +34,8 @@ function setup() {
     const backgound = new PIXI.Sprite(PIXI.loader.resources["images/fireplace.png"].texture);
     const book = new PIXI.Sprite(PIXI.loader.resources["images/book.png"].texture);
 
-    wizard = createWizard();
+    const wizardC = new Wizard();
+    wizard = wizardC.createWizard();
     const chest = createChest();
     const ui = createUI(app);
 
