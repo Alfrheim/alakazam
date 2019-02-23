@@ -30,35 +30,35 @@ function loadProgressHandler(resource) {
 
 function setup() {
     console.log("setup");
+    app.stage = new PIXI.display.Stage();
+    var mainContainer = new PIXI.Container();
+    app.stage.addChild(mainContainer);
 
     const backgound = new PIXI.Sprite(PIXI.loader.resources["images/fireplace.png"].texture);
-    const book = new PIXI.Sprite(PIXI.loader.resources["images/book.png"].texture);
 
-    wizard = createWizard();
-    const chest = createChest();
-    const ui = createUI(app);
-    var greenGroup = new PIXI.display.Group(1, false);
-    var backgroundGroup = new PIXI.display.Group(-1, false);
-
-    app.stage = new PIXI.display.Stage();
-    app.stage.group.enableSort = true;
-
-    app.stage.addChild(new PIXI.display.Layer(backgroundGroup));
-    app.stage.addChild(new PIXI.display.Layer(greenGroup));
-    // app.stage.addChild(backgound);
-    // app.stage.addChild(ui);
+    var uiDisplayGroup = new PIXI.display.Group(1, false);
+    app.stage.addChild(new PIXI.display.Layer(backgroundDisplayGroup));
+    var backgroundDisplayGroup = new PIXI.display.Group(-1, false);
+    app.stage.addChild(new PIXI.display.Layer(uiDisplayGroup));
     // app.stage.addChild(chest);
     // app.stage.addChild(wizard);
-
-    var bunniesOdd = new PIXI.Container();
-    app.stage.addChild(bunniesOdd);
     
 
-    backgound.parentGroup = backgroundGroup;
-    bunniesOdd.addChild(backgound);
-    ui.parentGroup = greenGroup;
-    bunniesOdd.addChild(ui);
 
+    const ui = createUI(app);
+    ui.parentGroup = uiDisplayGroup;
+    mainContainer.addChild(ui);
+
+    backgound.parentGroup = backgroundDisplayGroup;
+    mainContainer.addChild(backgound);
+
+    wizard = createWizard();
+    wizard.parentGroup = backgroundDisplayGroup;
+    mainContainer.addChild(wizard);
+
+    const chest = createChest();
+    chest.parentGroup = backgroundDisplayGroup;
+    mainContainer.addChild(chest);
 
 
     app.stage.hitArea = new PIXI.Rectangle(0, 0, app.renderer.width, app.renderer.height);
