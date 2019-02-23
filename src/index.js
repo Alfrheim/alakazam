@@ -1,5 +1,7 @@
 import Wizard from '@/sprites/Wizard';
 import createUI from '@/sprites/UI';
+import {DEFAULT_ROOM, createRooms} from '@/roomManager';
+//import DEFAULT_ROOM from '@/roomManager';
 import createChest from '@/sprites/Chest';
 import Room from '@/Room';
 PIXI_LAYERS;
@@ -14,11 +16,14 @@ document.body.appendChild(app.view);
 
 let clickX = 0;     //global variable to store direction of walking +/-
 let wizard;        //global variable where we will store class of wizard
+let currentRoom     //global variable to know in what room we are currently
 
 //we load here all images to catch them
 PIXI.loader
     .add("images/wizard.json")
     .add("images/fireplace.png")
+    .add("images/livingroom.png")
+    .add("images/mug.png")
     .add("images/chest.png")
     .add("images/book.png")
     .add("images/book-fireplace.png")
@@ -32,13 +37,10 @@ function loadProgressHandler(resource) {
 
 function setup() {
     console.log("setup");
+    currentRoom = DEFAULT_ROOM;
     app.stage = new PIXI.display.Stage();
     var mainContainer = new PIXI.Container();
     app.stage.addChild(mainContainer);
-
-    //const backgound = new PIXI.Sprite(PIXI.loader.resources["images/fireplace.png"].texture);   //the background is resource, so we can call it as such
-    //backgound.interactive = true;       //we indicate that we will interact with this sprite
-    //backgound.on('pointerdown', onClickWalk);   //when click, walk. Function is here a bit down
 
     var backgroundDisplayGroup = new PIXI.display.Group(-1, false);
     app.stage.addChild(new PIXI.display.Layer(backgroundDisplayGroup));
@@ -46,20 +48,22 @@ function setup() {
     var uiDisplayGroup = new PIXI.display.Group(1, false);
     app.stage.addChild(new PIXI.display.Layer(uiDisplayGroup));
 
-    const room1 = new Room("images/fireplace.png", mainContainer, backgroundDisplayGroup);
+    const rooms = createRooms(backgroundDisplayGroup, mainContainer);
+    rooms[currentRoom].background.on('pointerdown', onClickWalk);
+    rooms[currentRoom].render();
+
+    /*const room1 = new Room("images/fireplace.png", mainContainer, backgroundDisplayGroup);
     room1.background.on('pointerdown', onClickWalk);
     room1.addInteractiveItem("images/chest.png", 500, 500, "This is a chest");
     room1.addInteractiveItem("images/book-fireplace.png", 100, 100, "this is a book");
     room1.addWall("room2","room0"); //TODO: this should not be text
-    room1.render();
-    /*setTimeout(() => {
-        room1.remove()
-    }, 5000)*/
+    room1.render();*/
+    //setTimeout(() => {
+    //    room1.remove()
+    //}, 5000)
+    
     //we now show here the background and items. Order matters
     createUI(uiDisplayGroup, mainContainer);
-
-    //backgound.parentGroup = backgroundDisplayGroup;
-    //mainContainer.addChild(backgound);
 
     wizard = new Wizard("images/wizard.json", backgroundDisplayGroup, mainContainer);
 
