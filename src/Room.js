@@ -25,7 +25,7 @@ class Room {
         
     }
     
-    addWall (rightRoom, leftRoom){
+    addWalls (rightRoom, leftRoom){
         this.leftRoom = leftRoom;
         this.rightRoom = rightRoom;
 
@@ -42,14 +42,14 @@ class Room {
         rightWall.nextRoom = "right";
         //makes circle non-transparent when mouse over
         rightWall.mouseover = function(mouseData) {
-            this.alpha = 0.5;
+            this.alpha = 0.3;
           }
         // make circle half-transparent when mouse leaves - but it should be transparent
         rightWall.mouseout = function(mouseData) {
             this.alpha = 0;
         }
 
-        var leftWall = new PIXI.Graphics();
+        /*var leftWall = new PIXI.Graphics();
         leftWall.lineStyle(5, 0xFFFFFF, 1);
         leftWall.beginFill(0x0000FF, 1);
         leftWall.drawCircle(10, 300, 10);
@@ -57,16 +57,25 @@ class Room {
         leftWall.alpha = 0.5; //this should be zero, so is not visible until hoving over
         leftWall.interactive = true;
         leftWall.buttonMode = true;
-        leftWall.hitArea = new PIXI.Circle(10, 300, 10);
+        leftWall.hitArea = new PIXI.Circle(10, 300, 10);*/
+        var leftWall = new PIXI.Graphics();
+        leftWall.lineStyle(5, 0xFFFFFF, 1);
+        leftWall.beginFill(0x0000FF, 1);
+        leftWall.drawRect(0, 0, 30, 600);
+        leftWall.endFill();
+        leftWall.alpha = 0; //this should be zero, so is not visible until hoving over
+        leftWall.interactive = true;
+        leftWall.buttonMode = true;
+        leftWall.hitArea = new PIXI.Rectangle(0, 0, 30, 600);   //expandir a la mateixa area del rectangle
         this.interactiveItems.push(leftWall);
         leftWall.nextRoom = "left";
         //makes circle non-transparent when mouse over
         leftWall.mouseover = function(mouseData) {
-            this.alpha = 1;
+            this.alpha = 0.3;
           }
         // make circle half-transparent when mouse leaves - but it should be transparent
         leftWall.mouseout = function(mouseData) {
-            this.alpha = 0.5;
+            this.alpha = 0;
         }
 
         leftWall.on('pointerdown', this.goToRoom);
