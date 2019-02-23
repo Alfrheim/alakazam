@@ -22,6 +22,7 @@ PIXI.loader
     .add("images/chest.png")
     .add("images/book.png")
     .add("images/book-fireplace.png")
+    .add("images/book-page.png")
     .on("progress", loadProgressHandler)
     .load(setup);
 
@@ -53,7 +54,7 @@ function setup() {
     habitacio_1.addToContainer(backgroundDisplayGroup, mainContainer);
     
     //we now show here the background and items. Order matters
-    createUI(app, uiDisplayGroup, mainContainer);
+    createUI(uiDisplayGroup, mainContainer);
 
     //backgound.parentGroup = backgroundDisplayGroup;
     //mainContainer.addChild(backgound);
