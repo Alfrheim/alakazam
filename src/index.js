@@ -11,9 +11,10 @@ if(!PIXI.utils.isWebGLSupported()){
     type = "canvas";
 }*/
 
-const walkingSpeed = 1; 	
+const walkingSpeed = 5; 	
 let speed = 0;
 let clickX = 0;
+let wizard
 
 PIXI.loader
     .add("images/wizard.json")
@@ -23,37 +24,49 @@ PIXI.loader
     .load(setup);
 
 function loadProgressHandler(resource) {
-    console.log("loading: " + resource.url); 
-
-    //Display the percentage of files currently loaded
     console.log("progress: " + PIXI.loader.progress + "%"); 
 }
 
 function setup() {
     console.log("setup");
 
-    const sheet = PIXI.loader.resources["images/wizard.json"].spritesheet;
-    wizard = new PIXI.extras.AnimatedSprite(sheet.animations["walk"]);
     const backgound = new PIXI.Sprite(PIXI.loader.resources["images/fireplace.png"].texture);
-    const chest = new PIXI.Sprite(PIXI.loader.resources["images/chest.png"].texture);
-
-    wizard.x = 100;
-    wizard.y = 400; 
-    wizard.anchor.x = 0.5;
-    wizard.animationSpeed = 0.167; 
-       
-    chest.x = 300;
-    chest.y = 200;
+    
+    wizard = createWizard();
+    const chest = createChest();
+    
     app.stage.addChild(backgound);
     app.stage.addChild(chest);
     app.stage.addChild(wizard);
-
 
     app.stage.hitArea = new PIXI.Rectangle(0, 0, app.renderer.width, app.renderer.height);
     app.stage.interactive = true;
     app.stage.on('pointerdown', onClickWalk);
 
     app.ticker.add(delta => gameLoop(delta));
+
+    function createChest() {
+        const chest = new PIXI.Sprite(PIXI.loader.resources["images/chest.png"].texture);
+        chest.x = 300;
+        chest.y = 200;
+        chest.interactive = true;
+        chest.on('pointerdown', () => {
+            alert("Open chest :D");
+        });
+
+        return chest;
+    }
+
+    function createWizard() {
+        const sheet = PIXI.loader.resources["images/wizard.json"].spritesheet;
+        const wizard = new PIXI.extras.AnimatedSprite(sheet.animations["walk"]);
+        wizard.animationSpeed = 0.4;
+        wizard.play();
+        wizard.x = 100;
+        wizard.y = 400;
+
+        return wizard
+    }
 }
 
 function gameLoop(delta) {
