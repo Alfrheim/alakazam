@@ -36,29 +36,20 @@ function setup() {
 
     const backgound = new PIXI.Sprite(PIXI.loader.resources["images/fireplace.png"].texture);
 
-    var uiDisplayGroup = new PIXI.display.Group(1, false);
-    app.stage.addChild(new PIXI.display.Layer(backgroundDisplayGroup));
     var backgroundDisplayGroup = new PIXI.display.Group(-1, false);
+    app.stage.addChild(new PIXI.display.Layer(backgroundDisplayGroup));
+
+    var uiDisplayGroup = new PIXI.display.Group(1, false);
     app.stage.addChild(new PIXI.display.Layer(uiDisplayGroup));
-    // app.stage.addChild(chest);
-    // app.stage.addChild(wizard);
-    
 
-
-    const ui = createUI(app);
-    ui.parentGroup = uiDisplayGroup;
-    mainContainer.addChild(ui);
+    createUI(app, uiDisplayGroup, mainContainer);
 
     backgound.parentGroup = backgroundDisplayGroup;
     mainContainer.addChild(backgound);
 
-    wizard = createWizard();
-    wizard.parentGroup = backgroundDisplayGroup;
-    mainContainer.addChild(wizard);
+    wizard = createWizard(backgroundDisplayGroup, mainContainer);
 
-    const chest = createChest();
-    chest.parentGroup = backgroundDisplayGroup;
-    mainContainer.addChild(chest);
+    const chest = createChest(backgroundDisplayGroup, mainContainer);
 
 
     app.stage.hitArea = new PIXI.Rectangle(0, 0, app.renderer.width, app.renderer.height);
