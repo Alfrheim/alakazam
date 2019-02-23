@@ -14,7 +14,7 @@ function createUI(displayGroup, container) {
         if (!isMenuShowed) {
             bookPage.parentGroup = displayGroup;
             let todoTextY = 20;
-            todos.map( todo => new PIXI.Text(todo,{fontFamily : 'Arial', fontSize: 24, fill : 0xff1010, align : 'center'} ))
+            todos.map( todo => new PIXI.Text(todo,{fontFamily : 'Gullhornet', fontSize: 24, fill : 0xff1010, align : 'center'} ))
                 .forEach(todoText => {
                     todoText.x = 120;
                     todoText.y = todoTextY += 30;

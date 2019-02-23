@@ -1,9 +1,9 @@
 import Wizard from '@/sprites/Wizard';
 import createUI from '@/sprites/UI';
-import {DEFAULT_ROOM, createRooms} from '@/roomManager';
-//import DEFAULT_ROOM from '@/roomManager';
-import createChest from '@/sprites/Chest';
-import Room from '@/Room';
+import { DEFAULT_ROOM, createRooms } from '@/roomManager';
+import '@/css/index.css'
+
+
 PIXI_LAYERS;
 
 const app = new PIXI.Application({width: 800,
@@ -28,6 +28,7 @@ PIXI.loader
     .add("images/book.png")
     .add("images/book-fireplace.png")
     .add("images/book-page.png")
+    .add('fonts/gullhorn.ttf')
     .on("progress", loadProgressHandler)
     .load(setup);
 
