@@ -31,9 +31,10 @@
     "url-loader": "^1.1.2",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.1.14",
+    "howler": "^2.1.1"
   },
-  "author": "Daniel Jordi Perez <danipq26@gmail.com>",
+  "author": "Daniel Jordi Perez <danipq26@gmail.com>, Agnès Suhonen <dady.ab@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "pixi-layers": "^0.1.9",

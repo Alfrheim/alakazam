@@ -2,6 +2,7 @@ import Wizard from '@/sprites/Wizard';
 import createUI from '@/sprites/UI';
 import createRooms from '@/roomManager';
 import '@/css/index.css'
+import {Howl, Howler} from 'howler';
 
 
 PIXI_LAYERS;
@@ -66,6 +67,11 @@ function setup() {
 
     //we create the "clock" with delta value, that will refresh the stuff
     app.ticker.add(delta => gameLoop(delta));
+
+    var sound = new Howl({
+        src: ['media/rellotge2.wav']
+      });  
+    sound.play();
 
 }
 
