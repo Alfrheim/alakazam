@@ -32,6 +32,9 @@ class Room {
     }
     
     addWall (rightRoom, leftRoom){
+        this.leftRoom = leftRoom;
+        this.rightRoom = rightRoom;
+
         var rightWall = new PIXI.Graphics();
         rightWall.lineStyle(5, 0xFFFFFF, 1);
         rightWall.beginFill(0x0000FF, 1);
@@ -42,7 +45,7 @@ class Room {
         rightWall.buttonMode = true;
         rightWall.hitArea = new PIXI.Rectangle(800-30, 0, 30, 600);   //expandir a la mateixa area del rectangle
         this.interactiveItems.push(rightWall);
-        rightWall.nextRoom = rightRoom;
+        rightWall.nextRoom = "right";
         //makes circle non-transparent when mouse over
         rightWall.mouseover = function(mouseData) {
             this.alpha = 0.5;
@@ -62,7 +65,7 @@ class Room {
         leftWall.buttonMode = true;
         leftWall.hitArea = new PIXI.Circle(10, 300, 10);
         this.interactiveItems.push(leftWall);
-        leftWall.nextRoom = leftRoom;
+        leftWall.nextRoom = "left";
         //makes circle non-transparent when mouse over
         leftWall.mouseover = function(mouseData) {
             this.alpha = 1;
@@ -92,7 +95,12 @@ class Room {
 
     goToRoom(eventData) {
         this.remove();
-        eventData.target.nextRoom.render();
+        if (eventData.target.nextRoom == "left") {
+            this.leftRoom.render();
+        } else {
+            this.rightRoom.render();
+        }
+        
     }
 }
 export default Room;

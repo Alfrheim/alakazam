@@ -1,6 +1,6 @@
 import Wizard from '@/sprites/Wizard';
 import createUI from '@/sprites/UI';
-import { DEFAULT_ROOM, createRooms } from '@/roomManager';
+import createRooms from '@/roomManager';
 import '@/css/index.css'
 
 
@@ -16,13 +16,13 @@ document.body.appendChild(app.view);
 
 let clickX = 0;     //global variable to store direction of walking +/-
 let wizard;        //global variable where we will store class of wizard
-let currentRoom     //global variable to know in what room we are currently
 
 //we load here all images to catch them
 PIXI.loader
     .add("images/wizard.json")
     .add("images/fireplace.png")
     .add("images/livingroom.png")
+    .add("images/kitchen.png")
     .add("images/mug.png")
     .add("images/chest.png")
     .add("images/book.png")
@@ -38,7 +38,7 @@ function loadProgressHandler(resource) {
 
 function setup() {
     console.log("setup");
-    currentRoom = DEFAULT_ROOM;
+    
     app.stage = new PIXI.display.Stage();
     var mainContainer = new PIXI.Container();
     app.stage.addChild(mainContainer);
@@ -55,24 +55,14 @@ function setup() {
 
     const room = createRooms(backgroundDisplayGroup, mainContainer);
     room.background.on('pointerdown', onClickWalk);
+    room.rightRoom.background.on('pointerdown', onClickWalk);
+    room.leftRoom.background.on('pointerdown', onClickWalk);
     room.render();
 
-    /*const room1 = new Room("images/fireplace.png", mainContainer, backgroundDisplayGroup);
-    room1.background.on('pointerdown', onClickWalk);
-    room1.addInteractiveItem("images/chest.png", 500, 500, "This is a chest");
-    room1.addInteractiveItem("images/book-fireplace.png", 100, 100, "this is a book");
-    room1.addWall("room2","room0"); //TODO: this should not be text
-    room1.render();*/
-    //setTimeout(() => {
-    //    room1.remove()
-    //}, 5000)
-    
     //we now show here the background and items. Order matters
     createUI(uiDisplayGroup, mainContainer);
 
     wizard = new Wizard("images/wizard.json", wizardDisplayGroup, mainContainer);
-
-    //const chest = createChest(backgroundDisplayGroup, mainContainer);
 
     //we create the "clock" with delta value, that will refresh the stuff
     app.ticker.add(delta => gameLoop(delta));
