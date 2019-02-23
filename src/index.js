@@ -33,27 +33,21 @@ function setup() {
     console.log("setup");
 
     const sheet = PIXI.loader.resources["images/wizard.json"].spritesheet;
-    const animatedWizard = new PIXI.extras.AnimatedSprite(sheet.animations["walk"]);
-
-    // set speed, start playback and add it to the stage
-    animatedWizard.animationSpeed = 0.167; 
-    animatedWizard.play();
-    // wizard = new PIXI.extras.AnimatedSprite(PIXI.loader.resources["images/wizard.json"].animations["wizard-walk"]);
+    wizard = new PIXI.extras.AnimatedSprite(sheet.animations["walk"]);
     const backgound = new PIXI.Sprite(PIXI.loader.resources["images/fireplace.png"].texture);
     const chest = new PIXI.Sprite(PIXI.loader.resources["images/chest.png"].texture);
 
-    animatedWizard.x = 100;
-    animatedWizard.y = 400;
-    
+    wizard.x = 100;
+    wizard.y = 400; 
+    wizard.anchor.x = 0.5;
+    wizard.animationSpeed = 0.167; 
+       
     chest.x = 300;
     chest.y = 200;
     app.stage.addChild(backgound);
     app.stage.addChild(chest);
-    app.stage.addChild(animatedWizard);
-    // Example when we want to stop the animation
-    setTimeout(() => {
-        animatedWizard.stop();
-    }, 3000)
+    app.stage.addChild(wizard);
+
 
     app.stage.hitArea = new PIXI.Rectangle(0, 0, app.renderer.width, app.renderer.height);
     app.stage.interactive = true;
