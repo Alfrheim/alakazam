@@ -41,7 +41,7 @@ module.exports = {
             } 
          },
          {
-            test: /\.(png|svg|jpg|gif)$/,
+            test: /\.(png|svg|jpg|gif|ttf)$/,
             use: [
                'file-loader'
             ]
@@ -56,7 +56,10 @@ module.exports = {
           PIXI_LAYERS: 'pixi-layers/dist/pixi-layers.js',
           PIXI: 'pixi.js'
       }),
-      new CopyWebpackPlugin([{ from: './src/images', to: 'images' }]),
+      new CopyWebpackPlugin([
+         { from: './src/images', to: 'images' },
+         { from: './src/fonts', to: 'fonts' },
+      ]),
       new CleanWebpackPlugin(['dist']),
    ]
 }
