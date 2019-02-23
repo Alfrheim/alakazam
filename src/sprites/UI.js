@@ -19,7 +19,7 @@ function createUI(displayGroup, container) {
             let todoTextY = 20;
             quests.quests.map( quest => new PIXI.Text(quest.text,{fontFamily : quest.isDiscovered ? 'Verdana' :'Gullhornet', fontSize: 24, fill : 0xff1010, align : 'center', strokeThickness: 10} ))
                 .forEach(todoText => {
-                    todoText.x = 120;
+                    todoText.x = 210;
                     todoText.y = todoTextY += 35;
                     bookPage.addChild(todoText);
                 });
