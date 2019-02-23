@@ -1,12 +1,14 @@
 import createWizard from '@/sprites/Wizard';
 import createUI from '@/sprites/UI';
 import createChest from '@/sprites/Chest';
+PIXI_LAYERS;
 
 const app = new PIXI.Application({width: 800,
                                   height: 600,
                                   antialias: true,
                                   transparent: false,
                                   resolution: 1});
+
 document.body.appendChild(app.view);
 
 const walkingSpeed = 5;
@@ -34,7 +36,7 @@ function setup() {
 
     wizard = createWizard();
     const chest = createChest();
-    const ui = createUI();
+    const ui = createUI(app);
 
     app.stage.addChild(backgound);
     app.stage.addChild(ui);

@@ -53,7 +53,7 @@ module.exports = {
          title: 'Pixi.js'
       }),
       new webpack.ProvidePlugin({
-          PIXI_DISPLAY: 'pixi-display',
+          PIXI_LAYERS: 'pixi-layers/dist/pixi-layers.js',
           PIXI: 'pixi.js'
       }),
       new CopyWebpackPlugin([{ from: './src/images', to: 'images' }]),

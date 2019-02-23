@@ -1,7 +1,7 @@
 const DEFAULT_BOOK_X = 10;
 const DEFAULT_BOOK_Y = 530;
 
-function createUI() {
+function createUI(app) {
 
     const bookUI = new PIXI.Sprite(PIXI.loader.resources["images/book.png"].texture);
     bookUI.x = DEFAULT_BOOK_X;
