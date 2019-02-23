@@ -1,5 +1,5 @@
-const path = require('path')
-const webpack = require('webpack')
+const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -53,7 +53,8 @@ module.exports = {
          title: 'Pixi.js'
       }),
       new webpack.ProvidePlugin({
-         PIXI: 'pixi.js'
+          PIXI_DISPLAY: 'pixi-display',
+          PIXI: 'pixi.js'
       }),
       new CopyWebpackPlugin([{ from: './src/images', to: 'images' }]),
       new CleanWebpackPlugin(['dist']),
