@@ -1,13 +1,15 @@
+import quests from '@/Quests';
+
 class InteractiveItem extends PIXI.Sprite {
-    constructor(name, description, resource, room) {
+    constructor(description, resource, quest) {
         super(resource);
-        this.name = name;
         this.description = description;
-        this.belongsToRoom = room;
+        this.quest = quest;
     }
 
-    interactWith(interactiveItem) {
-        
+    interactWith(eventData) {
+        eventData.target.visible = false;
+        quests.quests[eventData.target.quest].isDiscovered = true;
     }
 }
 

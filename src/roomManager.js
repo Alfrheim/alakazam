@@ -3,16 +3,16 @@ import Room from '@/Room';
 function createRooms(displayGroup, container) {
 
     let room = new Room("images/fireplace.png", container, displayGroup);
-    room.addInteractiveItem("images/chest.png", 500, 500, "This is a chest");
-    room.addInteractiveItem("images/book-fireplace.png", 100, 100, "this is a book");  
+    room.addInteractiveItem("images/chest.png", 500, 500, "This is a chest", 0);
+    room.addInteractiveItem("images/book-fireplace.png", 100, 100, "this is a book", 2);  
 
     let room2 = new Room("images/livingroom.png", container, displayGroup);
-    room2.addInteractiveItem("images/mug.png", 300, 200, "This is a mug");
-    room2.addInteractiveItem("images/chest.png", 100, 100, "this is a book");
+    room2.addInteractiveItem("images/mug.png", 300, 200, "This is a mug", 3);
+    room2.addInteractiveItem("images/chest.png", 100, 100, "this is a book", 4);
 
     let room3 = new Room("images/kitchen.png", container, displayGroup);
-    room3.addInteractiveItem("images/mug.png", 300, 200, "This is a mug");
-    room3.addInteractiveItem("images/book-fireplace.png", 100, 100, "this is a book");
+    room3.addInteractiveItem("images/mug.png", 300, 200, "This is a mug", 5);
+    room3.addInteractiveItem("images/book-fireplace.png", 100, 100, "this is a book", 1);
     
     room.addWall(room3,room2);
     room2.addWall(room,room3);

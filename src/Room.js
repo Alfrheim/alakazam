@@ -1,4 +1,3 @@
-import InventoryItem from '@/sprites/InventoryItem';
 import InteractiveItem from '@/sprites/InteractiveItem';
 
 class Room {
@@ -12,18 +11,13 @@ class Room {
         this.goToRoom = this.goToRoom.bind(this);
     }
 
-    addInteractiveItem(itemResource, posX, posY, itemDescription, isInventory = true) {
-        let item
-        if (isInventory) {
-            item = new InventoryItem(itemDescription, itemDescription, PIXI.loader.resources[itemResource].texture);
-        } else {
-            item = new InteractiveItem(itemDescription, itemDescription, PIXI.loader.resources[itemResource].texture);
-        }
+    addInteractiveItem(itemResource, posX, posY, itemDescription, quest) {
+        let item = new InteractiveItem(itemDescription, PIXI.loader.resources[itemResource].texture, quest);
         item.x = posX;
         item.y = posY;
-        item.description = itemDescription;
         item.buttonMode = true;
         item.interactive = true;
+        item.on('pointerdown', item.interactWith);
         this.interactiveItems.push(item);
     }
 

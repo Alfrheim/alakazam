@@ -13,6 +13,7 @@ function createUI(displayGroup, container) {
     bookUI.x = DEFAULT_BOOK_X;
     bookUI.y = DEFAULT_BOOK_Y;
     bookUI.interactive = true;
+    bookUI.buttonMode = true;
     bookUI.on('pointerdown', () => {
         if (!isMenuShowed) {
             bookPage.parentGroup = displayGroup;
