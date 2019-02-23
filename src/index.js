@@ -37,11 +37,28 @@ function setup() {
     wizard = createWizard();
     const chest = createChest();
     const ui = createUI(app);
+    var greenGroup = new PIXI.display.Group(1, false);
+    var backgroundGroup = new PIXI.display.Group(-1, false);
 
-    app.stage.addChild(backgound);
-    app.stage.addChild(ui);
-    app.stage.addChild(chest);
-    app.stage.addChild(wizard);
+    app.stage = new PIXI.display.Stage();
+    app.stage.group.enableSort = true;
+
+    app.stage.addChild(new PIXI.display.Layer(backgroundGroup));
+    app.stage.addChild(new PIXI.display.Layer(greenGroup));
+    // app.stage.addChild(backgound);
+    // app.stage.addChild(ui);
+    // app.stage.addChild(chest);
+    // app.stage.addChild(wizard);
+
+    var bunniesOdd = new PIXI.Container();
+    app.stage.addChild(bunniesOdd);
+    
+
+    backgound.parentGroup = backgroundGroup;
+    bunniesOdd.addChild(backgound);
+    ui.parentGroup = greenGroup;
+    bunniesOdd.addChild(ui);
+
 
 
     app.stage.hitArea = new PIXI.Rectangle(0, 0, app.renderer.width, app.renderer.height);
