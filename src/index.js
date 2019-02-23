@@ -8,8 +8,6 @@ import {Howl, Howler} from 'howler';
 
 PIXI_LAYERS;
 
-//const {Howl, Howler} = require('howler');
-
 const app = new PIXI.Application({width: 800,
                                   height: 600,
                                   antialias: true,
@@ -74,10 +72,15 @@ function setup() {
     //we create the "clock" with delta value, that will refresh the stuff
     app.ticker.add(delta => gameLoop(delta));
 
-    /*var sound = new Howl({
-        src: ['media/rellotge2.wav']
-      });  
-    sound.play();*/
+    var sound = new Howl({
+        src: ['media/rellotge4.wav'],
+        autoplay: true,
+        loop: true,
+        volume: 3,
+        onend: function() {
+          console.log('Finished!');
+        }
+      });
 
 }
 
