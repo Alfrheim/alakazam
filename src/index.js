@@ -21,6 +21,7 @@ PIXI.loader
     .add("images/fireplace.png")
     .add("images/chest.png")
     .add("images/book.png")
+    .add("images/book-page.png")
     .on("progress", loadProgressHandler)
     .load(setup);
 
