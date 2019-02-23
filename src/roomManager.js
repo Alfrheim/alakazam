@@ -14,9 +14,9 @@ function createRooms(displayGroup, container) {
     room3.addInteractiveItem("images/mug.png", 300, 200, "This is a mug");
     room3.addInteractiveItem("images/book-fireplace.png", 100, 100, "this is a book");
     
-    room.addWall(room3,room2);
-    room2.addWall(room,room3);
-    room3.addWall(room2,room);
+    room.addWalls(room3,room2);
+    room2.addWalls(room,room3);
+    room3.addWalls(room2,room);
 
     return room;
 }
