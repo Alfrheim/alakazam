@@ -2,3 +2,7 @@
    font-family:"Gullhornet";
    src:url("../fonts/gullhorn.ttf") format("truetype");
  }
+
+ body {
+   font-family: 'Gullhornet';
+ }
