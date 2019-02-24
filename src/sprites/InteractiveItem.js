@@ -28,6 +28,11 @@ class InteractiveItem extends PIXI.Sprite {
                 if(quests.ouijaPieceFound) {
                     console.log("gameSpellScene GO!");
                     this.scenes.gameSpellScene.visible = true;
+                    setTimeout(() => {
+                        this.scenes.gameSpellScene.visible = false;
+                        this.scenes.gameOuijaScene.visible = true;
+                    }, 1000);
+                    
                 } else {
                     //TODO show this message on screen only for few seconds, or hide it next time we click somewhere?
                     let ouijaText = new PIXI.Text(this.description,{fontFamily : 'Verdana', fontSize: 15, fill : 0xff1010, align : 'center', strokeThickness: 10} );

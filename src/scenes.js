@@ -1,14 +1,16 @@
 export default (app) => {
-   const gameMenuScene = createGameMenuScene(app);
-   const gameOverScene = createGameOverScene(app);
-   const gameSpellScene = createSpellScene(app);
-   const gameIntroVideoScene = createIntroVideoScene(app);
+    const gameMenuScene = createGameMenuScene(app);
+    const gameOverScene = createGameOverScene(app);
+    const gameSpellScene = createSpellScene(app);
+    const gameOuijaScene = createOuijaScene(app);
+    const gameIntroVideoScene = createIntroVideoScene(app);
 
     return {
-      gameMenuScene,
-      gameOverScene,
-      gameSpellScene,
-      gameIntroVideoScene
+        gameMenuScene,
+        gameOverScene,
+        gameSpellScene,
+        gameIntroVideoScene,
+        gameOuijaScene
     }
 }
 
@@ -35,6 +37,18 @@ function createSpellScene(app) {
    return gameSpellScene;
 }
 
+
+function createOuijaScene(app) {
+    const ouijaSpellScene = new PIXI.Container();
+    let ouijaBackground = new PIXI.Sprite(PIXI.loader.resources["images/ouijawb.png"].texture);
+    let questionText = new PIXI.Text("So, what do you say?", { fontFamily: 'Verdana', fontSize: 42, fill: 0xff1010, align: 'center', strokeThickness: 10 });
+    questionText.x = 300;
+    questionText.y = 50;
+    ouijaSpellScene.addChild(ouijaBackground);
+    ouijaSpellScene.visible = false;
+    return ouijaSpellScene;
+}
+
 function createGameOverScene(app) {
    const gameOverScene = new PIXI.Container();
    let gameOverText = new PIXI.Text("Game Over", { fontFamily: 'Verdana', fontSize: 42, fill: 0xff1010, align: 'center', strokeThickness: 10 });
@@ -57,7 +71,7 @@ function createGameOverScene(app) {
 
 function createGameMenuScene(app) {
    const gameMenuScene = new PIXI.Container();
-   let menuNameText = new PIXI.Text("Game Name", { fontFamily: 'Verdana', fontSize: 42, fill: 0xff1010, align: 'center', strokeThickness: 10 });
+   let menuNameText = new PIXI.Text("Alakazam\n A Spellcraft guide", { fontFamily: 'Gullhornet', fontSize: 42, fill: 0xff1010, align: 'center', strokeThickness: 10 });
    let menuStartText = new PIXI.Text("Click/tap to start", { fontFamily: 'Verdana', fontSize: 24, fill: 0xff1010, align: 'center', strokeThickness: 10 });
    menuNameText.x = app.view.width / 6;
    menuNameText.y = app.view.height / 6;
