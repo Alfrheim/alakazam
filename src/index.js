@@ -23,6 +23,7 @@ let gameOverScene;
 let gameSpellScene;
 let gameWonScene;
 let gameMenuScene;
+let showIntro=true;
 
 //we load here all images to catch them
 PIXI.loader

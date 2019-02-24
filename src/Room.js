@@ -36,11 +36,11 @@ class Room {
         rightWall.hitArea = new PIXI.Rectangle(800-30, 0, 30, 600);   //expandir a la mateixa area del rectangle
         this.interactiveItems.push(rightWall);
         rightWall.nextRoom = "right";
-        //makes circle non-transparent when mouse over
+        //makes area semi-transparent when mouse over
         rightWall.mouseover = function(mouseData) {
             this.alpha = 0.3;
           }
-        // make circle half-transparent when mouse leaves - but it should be transparent
+        // make area transparent when mouse leaves
         rightWall.mouseout = function(mouseData) {
             this.alpha = 0;
         }
@@ -65,11 +65,11 @@ class Room {
         leftWall.hitArea = new PIXI.Rectangle(0, 0, 30, 600);   //expandir a la mateixa area del rectangle
         this.interactiveItems.push(leftWall);
         leftWall.nextRoom = "left";
-        //makes circle non-transparent when mouse over
+        //makes area semi-transparent when mouse over
         leftWall.mouseover = function(mouseData) {
             this.alpha = 0.3;
           }
-        // make circle half-transparent when mouse leaves - but it should be transparent
+        // make area transparent when mouse leaves - but it should be transparent
         leftWall.mouseout = function(mouseData) {
             this.alpha = 0;
         }
