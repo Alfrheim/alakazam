@@ -19,7 +19,7 @@ document.body.appendChild(app.view);
 let clickX = 0;     //global variable to store direction of walking +/-
 let wizard;        //global variable where we will store class of wizard
 let countDown;
-//let showIntro=true;
+let showIntro=true;
 
 //we load here all images to catch them
 PIXI.loader
