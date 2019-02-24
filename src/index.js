@@ -44,16 +44,11 @@ function loadProgressHandler() {
 
 function setup() {
     app.stage = new PIXI.display.Stage();
-    const { gameMenuScene, gameOverScene } = buildScenes(app);
+    const { gameMenuScene, gameOverScene, gameSpellScene } = buildScenes(app);
     const resetGameCallback = resetGame.bind(this, gameMenuScene, gameOverScene)
     
     gameMenuScene.on('pointerdown', resetGameCallback);
     gameOverScene.on('pointerdown', resetGameCallback);
-
-    gameSpellScene = new PIXI.Container();
-    let spellBackground = new PIXI.Sprite(PIXI.loader.resources["images/spell.png"].texture);
-    gameSpellScene.addChild(spellBackground);
-    gameSpellScene.visible = false;
     
     app.stage.addChild(gameMenuScene);
     app.stage.addChild(gameOverScene);

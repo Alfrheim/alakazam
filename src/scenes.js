@@ -1,11 +1,21 @@
 export default (app) => {
    const gameMenuScene = createGameMenuScene(app);
    const gameOverScene = createGameOverScene(app);
+   const gameSpellScene = createSpellScene(app);
 
     return {
       gameMenuScene,
-      gameOverScene
+      gameOverScene,
+      gameSpellScene
     }
+}
+
+function createSpellScene(app) {
+   const gameSpellScene = new PIXI.Container();
+   let spellBackground = new PIXI.Sprite(PIXI.loader.resources["images/spell.png"].texture);
+   gameSpellScene.addChild(spellBackground);
+   gameSpellScene.visible = false;
+   return gameSpellScene;
 }
 
 function createGameOverScene(app) {
