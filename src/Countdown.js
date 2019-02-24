@@ -30,14 +30,14 @@ class Countdown {
         } else if(this.isInCautionTime()) {
             if(this.soundType != "CAUTION") {
                 console.log("Caution");
-                this.sound.mute(true);
+                this.sound.stop();
             }
             this.clock.style['fill'] = 'yellow';
 
         } else if(this.isInWarningTime()) {
             if(this.soundType != "WARNING") {
                 console.log("Warning");
-                this.sound.mute(true);
+                this.sound.stop();
             }
             this.clock.style['fill'] = 'orange';
             textToShow = this.timeLeft;
@@ -45,7 +45,7 @@ class Countdown {
         } else {
             if(this.soundType != "DANGER") {
                 console.log("Danger");
-                this.sound.mute(true);
+                this.sound.stop();
             }
             this.clock.style['fill'] = 'red';
             textToShow = this.timeLeft;
@@ -79,7 +79,7 @@ class Countdown {
             loop: true,
             volume: 1.0
         });
-        result.once('mute', () => {
+        result.once('stop', () => {
             console.log("is muted");
             this.sound = this.cautionTimeSound();
         });
@@ -94,7 +94,7 @@ class Countdown {
             loop: true,
             volume: 2.0,
         });
-        result.once('mute', () => {
+        result.once('stop', () => {
             this.sound = this.warningTimeSound();
         });
         return result;
@@ -108,7 +108,7 @@ class Countdown {
             loop: true,
             volume: 3.0,
         });
-        result.once('mute', () => {
+        result.once('stop', () => {
             this.sound = this.dangerTimeSound();
         });
         return result;
