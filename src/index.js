@@ -45,7 +45,7 @@ function loadProgressHandler() {
 function setup() {
     app.stage = new PIXI.display.Stage();
     const { gameIntroVideoScene, gameMenuScene, gameOverScene, gameSpellScene } = buildScenes(app);
-    const resetGameCallback = resetGame.bind(this, gameMenuScene, gameOverScene);
+    const resetGameCallback = resetGame(gameMenuScene, gameOverScene)
     
     gameMenuScene.on('pointerdown', resetGameCallback);
     gameOverScene.on('pointerdown', resetGameCallback);
@@ -61,49 +61,51 @@ function setup() {
 }
 
 function resetGame(gameMenuScene, gameOverScene) {
-    console.log("reset game");
+    return () => {
+        console.log("reset game");
     
-    gameMenuScene.visible = false;
-    gameOverScene.visible = false;
-    const gameScene = new PIXI.Container();
-
-    const mainContainer = new PIXI.Container();
-    gameScene.addChild(mainContainer);
-
-    const backgroundDisplayGroup = new PIXI.display.Group(-1, false);
-    gameScene.addChild(new PIXI.display.Layer(backgroundDisplayGroup));
-
-
-    const wizardDisplayGroup = new PIXI.display.Group(5, false);
-    gameScene.addChild(new PIXI.display.Layer(wizardDisplayGroup));
-
-    const uiDisplayGroup = new PIXI.display.Group(10, false);
-    gameScene.addChild(new PIXI.display.Layer(uiDisplayGroup));
-
-    const room = createRooms(backgroundDisplayGroup, mainContainer);
-    room.background.on('pointerdown', onClickWalk);
-    room.rightRoom.background.on('pointerdown', onClickWalk);
-    room.leftRoom.background.on('pointerdown', onClickWalk);
-    room.render();
-
-    //we now show here the background and items. Order matters
-    createUI(uiDisplayGroup, mainContainer);
-
-    wizard = new Wizard("images/wizard.json", wizardDisplayGroup, mainContainer);
-    countDown = new Countdown(uiDisplayGroup, mainContainer);
+        gameMenuScene.visible = false;
+        gameOverScene.visible = false;
+        const gameScene = new PIXI.Container();
     
-    const gameCallback = () => {
-        wizard.checkWizardWalk(clickX);
-        countDown.refresh();
-        if (countDown.isOverTime()) {
-            countDown.sound.stop();
-            gameScene.visible = false;
-            gameOverScene.visible = true;
+        const mainContainer = new PIXI.Container();
+        gameScene.addChild(mainContainer);
+    
+        const backgroundDisplayGroup = new PIXI.display.Group(-1, false);
+        gameScene.addChild(new PIXI.display.Layer(backgroundDisplayGroup));
+    
+    
+        const wizardDisplayGroup = new PIXI.display.Group(5, false);
+        gameScene.addChild(new PIXI.display.Layer(wizardDisplayGroup));
+    
+        const uiDisplayGroup = new PIXI.display.Group(10, false);
+        gameScene.addChild(new PIXI.display.Layer(uiDisplayGroup));
+    
+        const room = createRooms(backgroundDisplayGroup, mainContainer);
+        room.background.on('pointerdown', onClickWalk);
+        room.rightRoom.background.on('pointerdown', onClickWalk);
+        room.leftRoom.background.on('pointerdown', onClickWalk);
+        room.render();
+    
+        //we now show here the background and items. Order matters
+        createUI(uiDisplayGroup, mainContainer);
+    
+        wizard = new Wizard("images/wizard.json", wizardDisplayGroup, mainContainer);
+        countDown = new Countdown(uiDisplayGroup, mainContainer);
+        
+        const gameCallback = () => {
+            wizard.checkWizardWalk(clickX);
+            countDown.refresh();
+            if (countDown.isOverTime()) {
+                countDown.sound.stop();
+                gameScene.visible = false;
+                gameOverScene.visible = true;
+            }
         }
+        //we create the "clock" with delta value, that will refresh the stuff
+        app.stage.addChild(gameScene);
+        app.ticker.add(delta => gameLoop(delta, gameCallback));
     }
-    //we create the "clock" with delta value, that will refresh the stuff
-    app.stage.addChild(gameScene);
-    app.ticker.add(delta => gameLoop(delta, gameCallback));
 }
 
 function gameLoop(delta, gameCallback) {
