@@ -4,7 +4,6 @@ import createUI from '@/sprites/UI';
 import createRooms from '@/roomManager';
 //import GameState from '@/GameState';
 import '@/css/index.css'
-import {Howl, Howler} from 'howler';
 
 
 PIXI_LAYERS;
@@ -97,16 +96,6 @@ function setupGame() {
 
     //we create the "clock" with delta value, that will refresh the stuff
     app.ticker.add(delta => gameLoop(delta));
-
-    var sound = new Howl({
-        src: ['media/rellotge_lent_cut.wav'],
-        autoplay: true,
-        loop: true,
-        volume: 3,
-        onend: function() {
-          console.log('Finished!');
-        }
-      });
 
 }
 
