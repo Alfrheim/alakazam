@@ -50,6 +50,7 @@ function createGameOverScene(app) {
    gameOverScene.addChild(gameOverText);
    gameOverScene.addChild(tryAgainText);
    gameOverScene.interactive = true;
+   gameOverScene.hitArea=new PIXI.Rectangle(0,0,app.view.width,app.view.height);
    gameOverScene.visible = false;
    return gameOverScene;
 }
@@ -69,5 +70,6 @@ function createGameMenuScene(app) {
    gameMenuScene.addChild(menuNameText);
    gameMenuScene.addChild(menuStartText);
    gameMenuScene.interactive = true;
+   gameMenuScene.hitArea=new PIXI.Rectangle(0,0,app.view.width,app.view.height);
    return gameMenuScene;
 }
