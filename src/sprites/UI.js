@@ -17,6 +17,7 @@ function createUI(displayGroup, container) {
     bookUI.cursor='zoom-in';
     bookUI.on('pointerdown', () => {
         if (!isMenuShowed) {
+            bookUI.cursor='zoom-out';
             bookPage.parentGroup = displayGroup;
             let todoTextY = 20;
             bookPage.removeChildren();
@@ -36,6 +37,7 @@ function createUI(displayGroup, container) {
             }
             container.addChild(bookPage);
         } else {
+            bookUI.cursor='zoom-in';
             container.removeChild(bookPage);
         }
 
