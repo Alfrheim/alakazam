@@ -49,7 +49,7 @@ function setup() {
     const resetGameCallback = resetGame(scenes);
     
     gameMenuScene.on('pointerdown', resetGameCallback);
-    gameOverScene.on('pointerdown', resetGameCallback);
+    gameOverScene.on('pointerdown', () => window.location.reload());
     
     app.stage.addChild(gameIntroVideoScene);
     app.stage.addChild(gameMenuScene);
