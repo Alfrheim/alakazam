@@ -42,13 +42,64 @@ function createSpellScene(app) {
 }
 
 
-function createOuijaScene(app) {
+function createOuijaScene(app, gameScene, winScene) {
     const ouijaSpellScene = new PIXI.Container();
     let ouijaBackground = new PIXI.Sprite(PIXI.loader.resources["images/ouijawb.png"].texture);
     let questionText = new PIXI.Text("So, what do you say?", { fontFamily: 'Verdana', fontSize: 42, fill: 0xff1010, align: 'center', strokeThickness: 10 });
     questionText.x = 300;
     questionText.y = 50;
+    let order = 0;
+    const characterContainers = [];
+   //  ouijaSpellScene.on('pointerdown', (event) => {
+   //     const isSprite = event.target instanceof PIXI.Sprite;
+   //     console.log(event.target, isSprite)
+   //     if (!isSprite) {
+   //        order = 0;
+   //        characterContainers.forEach((characterContainer) => {
+   //           characterContainer.alpha = 0;
+   //           characterContainer.x = 0;
+   //           characterContainer.y = 0;
+   //           characterContainer.width = 1;
+   //           characterContainer.height = 1;
+   //        })
+   //     }
+   //  });
     ouijaSpellScene.addChild(ouijaBackground);
+    [
+       new PIXI.Rectangle(194, 132, 65, 65), // C
+       new PIXI.Rectangle(77, 161, 65, 65), // A
+       new PIXI.Rectangle(283, 188, 65, 65), // S
+       new PIXI.Rectangle(330, 183, 65, 65) // T
+    ].forEach((rectangle, index) => {
+      const characterContainer = new PIXI.Sprite(PIXI.Texture.WHITE);
+      characterContainer.interactive = true;
+      characterContainer.alpha = 0;
+      characterContainer.hitArea = rectangle;
+      ouijaSpellScene.addChild(characterContainer)
+      
+      characterContainer.on('pointerdown', () => {
+         if (index === order) {
+            order++;
+            // characterContainer.alpha = 0.3;
+            // characterContainer.x = rectangle.x;
+            // characterContainer.y = rectangle.y;
+            // characterContainer.width = rectangle.width;
+            // characterContainer.height = rectangle.height;
+            // characterContainer.tint = Math.random() * 0xFFFFFF;
+
+            if(order === 4) {
+               alert('You win the game')
+            }
+         } else {
+            order = 0;
+            // characterContainers.forEach((characterContainer) => {
+            //    characterContainer.alpha = 0;
+            // })
+         }
+      });
+      characterContainers.push(characterContainer);
+    });
+
     ouijaSpellScene.visible = false;
     return ouijaSpellScene;
 }
