@@ -23,9 +23,8 @@ let intro=true;
 
 //we load here all images to catch them
 PIXI.loader
-    .add("images/wizard.json")
+    //.add("images/wizard.json")
     .add("images/wizardv2.json")
-    .add("images/fireplace.png")
     .add("images/livingroom.png")
     .add("images/office.png")
     .add("images/guix.png")
@@ -34,14 +33,12 @@ PIXI.loader
     .add("images/potion.png")
     .add("images/morter.png")
     .add("images/ouijav2.png")
+    .add("images/lighter.png")
     .add("images/kitchenv2.png")
     .add("images/believe.jpg")
     .add("images/spell.png")
-    .add("images/mug.png")
-    .add("images/ouijawb_small.png")
-    .add("images/chest.png")
+    //.add("images/chest.png")
     .add("images/book.png")
-    .add("images/book-fireplace.png")
     .add("images/book-page.png")
     .add("images/ouijawb.png")
     .add('fonts/gullhorn.ttf')

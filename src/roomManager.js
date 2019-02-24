@@ -8,10 +8,8 @@ function createRooms(displayGroup, container, scenes) {
     room.addInteractiveItem("images/ouijav2.png", 557, 283, "We are still missing something...", -1, "ouija", scenes);  
 
     let room2 = new Room("images/livingroom.png", container, displayGroup);
-    room2.addInteractiveItem("images/mug.png", 300, 200, "This is a mug", 0);
-    //room2.addInteractiveItem("images/chest.png", 100, 100, "this is a book", 4);
-    //room2.addInteractiveItem("images/ouijawb_small.png", 500, 400, "We are still missing something...", -1, "ouija", scenes);
-
+    room2.addInteractiveItem("images/lighter.png", 318, 437, "This is a mug", 0);
+    
     let room3 = new Room("images/kitchenv2.png", container, displayGroup);
     room3.addInteractiveItem("images/morter.png", 389, 248, "This is a mug", 3);
     room3.addInteractiveItem("images/knife.png", 132, 288, "this is a book", 4);
