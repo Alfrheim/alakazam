@@ -103,6 +103,8 @@ function resetGame(scenes) {
             if (countDown.isOverTime()) {
                 countDown.sound.stop();
                 gameScene.visible = false;
+                scenes.gameSpellScene.visible = false;
+
                 scenes.gameOverScene.visible = true;
             }
         }
