@@ -44,7 +44,7 @@ function createSpellScene(app) {
 }
 
 function createEndGameScene(app) {
-   let gameWinText = new PIXI.Text("The Angel is gone. \n We'll not hear its voice but\n we will continue roaming its glorious land for a while more...", { fontFamily: 'Verdana', fontSize: 42, fill: 0xff1010, align: 'center', strokeThickness: 10 });
+   let gameWinText = new PIXI.Text("The Angel is gone. \n We will not hear its voice anymore but\n we will continue roaming its glorious land for a while longer...", { fontFamily: 'Verdana', fontSize: 42, fill: 0xff1010, align: 'center', strokeThickness: 10 });
    gameWinText.x = 0;
    gameWinText.y = 50;
    // gameWinText.anchor.x = 1;
