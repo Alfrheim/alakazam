@@ -133,6 +133,7 @@ function gameLoop(delta) {
     wizard.checkWizardWalk(clickX);
     countDown.refresh();
     if (countDown.isOverTime()) {
+        countDown.sound.stop();
         gameScene.visible = false;
         gameOverScene.visible = true;
     }

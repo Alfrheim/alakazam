@@ -1,6 +1,6 @@
 import {Howl, Howler} from 'howler';
 
-const INITIAL_TIME = 1 * 60000;
+const INITIAL_TIME = 0.5 * 60000;
 
 class Countdown {
 
@@ -71,57 +71,58 @@ class Countdown {
         return this.timeLeft <= 0;
     }
 
-    calmTimeSound(countDown) {
-        countDown.soundType = "CALM";
+    calmTimeSound() {
+        this.soundType = "CALM";
         const result = new Howl({
             src: ['media/rellotge_lent_cut.wav'],
             autoplay: true,
             loop: true,
-            volume: 0.5
+            volume: 1.0
         });
-        result.once('mute', function() {
+        result.once('mute', () => {
             console.log("is muted");
-            countDown.sound = countDown.cautionTimeSound(countDown);
+            this.sound = this.cautionTimeSound();
         });
         return result;
     }
 
-    cautionTimeSound(countDown) {
-        countDown.soundType = "CAUTION";
+    cautionTimeSound() {
+        this.soundType = "CAUTION";
         const result = new Howl({
             src: ['media/rellotge_lent_cut.wav'],
             autoplay: true,
             loop: true,
-            volume: 1.5,
+            volume: 2.0,
         });
-        result.once('mute', function() {
-            countDown.sound = countDown.warningTimeSound(countDown);
+        result.once('mute', () => {
+            this.sound = this.warningTimeSound();
         });
         return result;
     }
 
-    warningTimeSound(countDown) {
-        countDown.soundType = "WARNING";
+    warningTimeSound() {
+        this.soundType = "WARNING";
         const result = new Howl({
             src: ['media/rellotge4.wav'],
             autoplay: true,
             loop: true,
-            volume: 2.5,
+            volume: 3.0,
         });
-        result.once('mute', function() {
-            countDown.sound = countDown.dangerTimeSound(countDown);
+        result.once('mute', () => {
+            this.sound = this.dangerTimeSound();
         });
         return result;
     }
 
-    dangerTimeSound(countDown) {
-        countDown.soundType = "DANGER";
+    dangerTimeSound() {
+        this.soundType = "DANGER";
         const result = new Howl({
             src: ['media/rellotge_rapid_cut.wav'],
             autoplay: true,
             loop: true,
-            volume: 3.5,
+            volume: 5.0,
         });
+        return result;
     }
 }
 
