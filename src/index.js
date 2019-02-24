@@ -23,6 +23,7 @@ let countDown;
 //we load here all images to catch them
 PIXI.loader
     .add("images/wizard.json")
+    .add("images/wizardv2.json")
     .add("images/fireplace.png")
     .add("images/livingroom.png")
     .add("images/kitchen.png")
@@ -85,7 +86,8 @@ function resetGame(gameMenuScene, gameOverScene) {
         //we now show here the background and items. Order matters
         createUI(uiDisplayGroup, mainContainer);
     
-        wizard = new Wizard("images/wizard.json", wizardDisplayGroup, mainContainer);
+        //wizard = new Wizard("images/wizard.json", wizardDisplayGroup, mainContainer);
+        wizard = new Wizard("images/wizardv2.json", wizardDisplayGroup, mainContainer);
         countDown = new Countdown(uiDisplayGroup, mainContainer);
         
         const gameCallback = () => {
