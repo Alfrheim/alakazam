@@ -117,7 +117,6 @@ function resetGame(scenes) {
         //we now show here the background and items. Order matters
         createUI(uiDisplayGroup, mainContainer);
     
-        //wizard = new Wizard("images/wizard.json", wizardDisplayGroup, mainContainer);
         wizard = new Wizard("images/wizardv2.json", wizardDisplayGroup, mainContainer);
         countDown = new Countdown(uiDisplayGroup, mainContainer);
         
