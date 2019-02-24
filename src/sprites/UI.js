@@ -18,6 +18,7 @@ function createUI(displayGroup, container) {
         if (!isMenuShowed) {
             bookPage.parentGroup = displayGroup;
             let todoTextY = 20;
+            bookPage.removeChildren();
             quests.quests.map( quest => new PIXI.Text(quest.text,{fontFamily : quest.isDiscovered ? 'Verdana' :'Gullhornet', fontSize: 24, fill : 0xff1010, align : 'center', strokeThickness: 10} ))
                 .forEach(todoText => {
                     todoText.x = 210;

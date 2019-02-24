@@ -73,7 +73,7 @@ function setup() {
     app.ticker.add(delta => gameLoop(delta));
 
     var sound = new Howl({
-        src: ['media/rellotge4.wav'],
+        src: ['media/rellotge_lent_cut.wav'],
         autoplay: true,
         loop: true,
         volume: 3,
