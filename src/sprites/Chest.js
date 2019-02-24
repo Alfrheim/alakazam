@@ -1,5 +1,5 @@
-var DEFAULT_X = 300;
-var DEFAULT_Y = 200;
+const DEFAULT_X = 300;
+const DEFAULT_Y = 200;
 
 function createChest(displayGroup, container) {
     const chest = new PIXI.Sprite(PIXI.loader.resources["images/chest.png"].texture);

@@ -25,7 +25,7 @@ class Room {
         this.leftRoom = leftRoom;
         this.rightRoom = rightRoom;
 
-        var rightWall = new PIXI.Graphics();
+        const rightWall = new PIXI.Graphics();
         rightWall.lineStyle(5, 0xFFFFFF, 1);
         rightWall.beginFill(0x0000FF, 1);
         rightWall.drawRect(800-30, 0, 30, 600);
@@ -45,7 +45,7 @@ class Room {
             this.alpha = 0;
         }
 
-        /*var leftWall = new PIXI.Graphics();
+        /*const leftWall = new PIXI.Graphics();
         leftWall.lineStyle(5, 0xFFFFFF, 1);
         leftWall.beginFill(0x0000FF, 1);
         leftWall.drawCircle(10, 300, 10);
@@ -54,7 +54,7 @@ class Room {
         leftWall.interactive = true;
         leftWall.buttonMode = true;
         leftWall.hitArea = new PIXI.Circle(10, 300, 10);*/
-        var leftWall = new PIXI.Graphics();
+        const leftWall = new PIXI.Graphics();
         leftWall.lineStyle(5, 0xFFFFFF, 1);
         leftWall.beginFill(0x0000FF, 1);
         leftWall.drawRect(0, 0, 30, 600);

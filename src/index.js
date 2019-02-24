@@ -98,17 +98,17 @@ function resetGame() {
     gameOverScene.visible = false;
     gameScene = new PIXI.Container();
 
-    var mainContainer = new PIXI.Container();
+    const mainContainer = new PIXI.Container();
     gameScene.addChild(mainContainer);
 
-    var backgroundDisplayGroup = new PIXI.display.Group(-1, false);
+    const backgroundDisplayGroup = new PIXI.display.Group(-1, false);
     gameScene.addChild(new PIXI.display.Layer(backgroundDisplayGroup));
 
 
-    var wizardDisplayGroup = new PIXI.display.Group(5, false);
+    const wizardDisplayGroup = new PIXI.display.Group(5, false);
     gameScene.addChild(new PIXI.display.Layer(wizardDisplayGroup));
 
-    var uiDisplayGroup = new PIXI.display.Group(10, false);
+    const uiDisplayGroup = new PIXI.display.Group(10, false);
     gameScene.addChild(new PIXI.display.Layer(uiDisplayGroup));
 
     const room = createRooms(backgroundDisplayGroup, mainContainer);
