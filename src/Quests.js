@@ -4,6 +4,7 @@ class Quests {
 
     constructor(args) {
         this.translatedQuests = 0;
+        this.ouijaPieceFound = false;
         this.quests = [
             new Quest(1, "Find a blue potion", false),
             new Quest(2, "Not Implemented", false),

@@ -18,7 +18,6 @@ document.body.appendChild(app.view);
 
 let clickX = 0;     //global variable to store direction of walking +/-
 let wizard;        //global variable where we will store class of wizard
-let currentRoom     //global variable to know in what room we are currently
 let countDown;
 
 //we load here all images to catch them
@@ -28,6 +27,7 @@ PIXI.loader
     .add("images/livingroom.png")
     .add("images/kitchen.png")
     .add("images/mug.png")
+    .add("images/ouijawb_small.png")
     .add("images/chest.png")
     .add("images/book.png")
     .add("images/book-fireplace.png")

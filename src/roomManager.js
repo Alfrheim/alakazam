@@ -9,6 +9,7 @@ function createRooms(displayGroup, container) {
     let room2 = new Room("images/livingroom.png", container, displayGroup);
     room2.addInteractiveItem("images/mug.png", 300, 200, "This is a mug", 3);
     room2.addInteractiveItem("images/chest.png", 100, 100, "this is a book", 4);
+    room2.addInteractiveItem("images/ouijawb_small.png", 500, 400, "We are still missing something...", -1, "ouija");
 
     let room3 = new Room("images/kitchen.png", container, displayGroup);
     room3.addInteractiveItem("images/mug.png", 300, 200, "This is a mug", 5);

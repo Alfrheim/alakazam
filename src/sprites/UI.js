@@ -30,6 +30,7 @@ function createUI(displayGroup, container) {
                 finalText.x = 210;
                 finalText.y = todoTextY + 50;
                 bookPage.addChild(finalText);
+                quests.ouijaPieceFound = true;
             }
             container.addChild(bookPage);
         } else {

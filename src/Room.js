@@ -11,8 +11,8 @@ class Room {
         this.goToRoom = this.goToRoom.bind(this);
     }
 
-    addInteractiveItem(itemResource, posX, posY, itemDescription, quest) {
-        let item = new InteractiveItem(itemDescription, PIXI.loader.resources[itemResource].texture, quest);
+    addInteractiveItem(itemResource, posX, posY, itemDescription, quest, itemType = "quest") {
+        let item = new InteractiveItem(itemDescription, PIXI.loader.resources[itemResource].texture, quest, itemType);
         item.x = posX;
         item.y = posY;
         item.buttonMode = true;
