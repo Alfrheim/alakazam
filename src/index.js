@@ -26,6 +26,7 @@ PIXI.loader
     .add("images/fireplace.png")
     .add("images/livingroom.png")
     .add("images/kitchen.png")
+    .add("images/believe.jpg")
     .add("images/spell.png")
     .add("images/mug.png")
     .add("images/ouijawb_small.png")
@@ -89,6 +90,7 @@ function resetGame(scenes) {
         room.background.on('pointerdown', onClickWalk);
         room.rightRoom.background.on('pointerdown', onClickWalk);
         room.leftRoom.background.on('pointerdown', onClickWalk);
+        room.ceiling.background.on('pointerdown', onClickWalk);
         room.render();
     
         //we now show here the background and items. Order matters
