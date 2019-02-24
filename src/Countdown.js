@@ -1,6 +1,6 @@
 import {Howl, Howler} from 'howler';
 
-const INITIAL_TIME = 0.25 * 60000;
+const INITIAL_TIME = 5 * 60000;
 
 class Countdown {
 
