@@ -19,7 +19,6 @@ document.body.appendChild(app.view);
 let clickX = 0;     //global variable to store direction of walking +/-
 let wizard;        //global variable where we will store class of wizard
 let countDown;
-let gameScene;
 let gameSpellScene;
 
 //we load here all images to catch them
@@ -66,7 +65,7 @@ function resetGame(gameMenuScene, gameOverScene) {
     
     gameMenuScene.visible = false;
     gameOverScene.visible = false;
-    gameScene = new PIXI.Container();
+    const gameScene = new PIXI.Container();
 
     const mainContainer = new PIXI.Container();
     gameScene.addChild(mainContainer);
