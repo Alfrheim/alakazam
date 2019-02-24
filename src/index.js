@@ -35,6 +35,7 @@ PIXI.loader
     .add("images/book.png")
     .add("images/book-fireplace.png")
     .add("images/book-page.png")
+    .add("images/ouijawb.png")
     .add('fonts/gullhorn.ttf')
     .on("progress", loadProgressHandler)
     .load(setup);
@@ -46,7 +47,7 @@ function loadProgressHandler() {
 function setup() {
     app.stage = new PIXI.display.Stage();
     const scenes = buildScenes(app);
-    const { gameIntroVideoScene, gameMenuScene, gameOverScene, gameSpellScene } = scenes;
+    const { gameIntroVideoScene, gameMenuScene, gameOverScene, gameSpellScene, gameOuijaScene } = scenes;
     const resetGameCallback = resetGame(scenes);
     
     gameMenuScene.on('pointerdown', resetGameCallback);
@@ -78,9 +79,12 @@ function resetGame(scenes) {
 
         const ouijaDisplayGroup = new PIXI.display.Group(9, false);
         gameScene.addChild(new PIXI.display.Layer(ouijaDisplayGroup));
-        // ouijaDisplayGroup.visible = false;
+
         scenes.gameSpellScene.parentGroup = ouijaDisplayGroup;
         mainContainer.addChild(scenes.gameSpellScene);
+
+        scenes.gameOuijaScene.parentGroup = ouijaDisplayGroup;
+        mainContainer.addChild(scenes.gameOuijaScene);
 
         const uiDisplayGroup = new PIXI.display.Group(10, false);
         gameScene.addChild(new PIXI.display.Layer(uiDisplayGroup));
