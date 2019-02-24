@@ -19,7 +19,7 @@ document.body.appendChild(app.view);
 let clickX = 0;     //global variable to store direction of walking +/-
 let wizard;        //global variable where we will store class of wizard
 let countDown;
-let showIntro=true;
+//let showIntro=true;
 
 //we load here all images to catch them
 PIXI.loader
@@ -44,12 +44,17 @@ function loadProgressHandler() {
 
 function setup() {
     app.stage = new PIXI.display.Stage();
-    const { gameMenuScene, gameOverScene, gameSpellScene } = buildScenes(app);
-    const resetGameCallback = resetGame.bind(this, gameMenuScene, gameOverScene)
+    const { gameIntroVideoScene, gameMenuScene, gameOverScene, gameSpellScene } = buildScenes(app);
+    const resetGameCallback = resetGame.bind(this, gameMenuScene, gameOverScene);
     
     gameMenuScene.on('pointerdown', resetGameCallback);
     gameOverScene.on('pointerdown', resetGameCallback);
     
+    if (showIntro)
+    { 
+        showIntro=false;
+        app.stage.addChild(gameIntroVideoScene);
+    }
     app.stage.addChild(gameMenuScene);
     app.stage.addChild(gameOverScene);
     app.stage.addChild(gameSpellScene);
@@ -99,7 +104,6 @@ function resetGame(gameMenuScene, gameOverScene) {
     //we create the "clock" with delta value, that will refresh the stuff
     app.stage.addChild(gameScene);
     app.ticker.add(delta => gameLoop(delta, gameCallback));
-
 }
 
 function gameLoop(delta, gameCallback) {

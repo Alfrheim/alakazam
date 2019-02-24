@@ -2,12 +2,29 @@ export default (app) => {
    const gameMenuScene = createGameMenuScene(app);
    const gameOverScene = createGameOverScene(app);
    const gameSpellScene = createSpellScene(app);
+   const gameIntroVideoScene = createIntroVideoScene(app);
 
     return {
       gameMenuScene,
       gameOverScene,
-      gameSpellScene
+      gameSpellScene,
+      gameIntroVideoScene
     }
+}
+
+function createIntroVideoScene(app){
+   const gameIntroVideoScene = new PIXI.Container();
+   
+   // create a video texture from a path
+   let texture = PIXI.Texture.fromVideo('media/intro.mp4');
+
+   // create a new Sprite using the video texture (yes it's that easy)
+   let videoSprite = new PIXI.Sprite(texture);
+
+   //adding video sprite to the container
+   gameIntroVideoScene.addChild(videoSprite);
+
+   return gameIntroVideoScene;
 }
 
 function createSpellScene(app) {
