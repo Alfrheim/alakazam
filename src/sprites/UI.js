@@ -14,6 +14,7 @@ function createUI(displayGroup, container) {
     bookUI.y = DEFAULT_BOOK_Y;
     bookUI.interactive = true;
     bookUI.buttonMode = true;
+    bookUI.cursor='zoom-in';
     bookUI.on('pointerdown', () => {
         if (!isMenuShowed) {
             bookPage.parentGroup = displayGroup;

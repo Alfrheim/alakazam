@@ -34,6 +34,7 @@ class Room {
         rightWall.alpha = 0; //this should be zero, so is not visible until hoving over
         rightWall.interactive = true;
         rightWall.buttonMode = true;
+        rightWall.cursor = 'e-resize';
         rightWall.hitArea = new PIXI.Rectangle(800-30, 0, 30, 600);   //expandir a la mateixa area del rectangle
         this.interactiveItems.push(rightWall);
         rightWall.nextRoom = "right";
@@ -64,6 +65,7 @@ class Room {
         leftWall.interactive = true;
         leftWall.buttonMode = true;
         leftWall.hitArea = new PIXI.Rectangle(0, 0, 30, 600);   //expandir a la mateixa area del rectangle
+        leftWall.cursor= 'w-resize';
         this.interactiveItems.push(leftWall);
         leftWall.nextRoom = "left";
         //makes area semi-transparent when mouse over
@@ -84,6 +86,7 @@ class Room {
             ceilingWall.alpha = 0; //this should be zero, so is not visible until hoving over
             ceilingWall.interactive = true;
             ceilingWall.buttonMode = true;
+            ceilingWall.cursor = 'n-resize';
             ceilingWall.hitArea = new PIXI.Circle(85,0,10);   //expandir a la mateixa area del rectangle
             this.interactiveItems.push(ceilingWall);
             ceilingWall.nextRoom = "up";
