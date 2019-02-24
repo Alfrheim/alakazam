@@ -27,6 +27,7 @@ PIXI.loader
     .add("images/fireplace.png")
     .add("images/livingroom.png")
     .add("images/kitchen.png")
+    .add("images/believe.jpg")
     .add("images/spell.png")
     .add("images/mug.png")
     .add("images/ouijawb_small.png")
@@ -44,24 +45,24 @@ function loadProgressHandler() {
 
 function setup() {
     app.stage = new PIXI.display.Stage();
-    const { gameIntroVideoScene, gameMenuScene, gameOverScene, gameSpellScene } = buildScenes(app);
-    const resetGameCallback = resetGame(gameMenuScene, gameOverScene)
+    const scenes = buildScenes(app);
+    const { gameIntroVideoScene, gameMenuScene, gameOverScene, gameSpellScene } = scenes;
+    const resetGameCallback = resetGame(scenes);
     
     gameMenuScene.on('pointerdown', resetGameCallback);
-    gameOverScene.on('pointerdown', resetGameCallback);
+    gameOverScene.on('pointerdown', () => window.location.reload());
     
     app.stage.addChild(gameIntroVideoScene);
     app.stage.addChild(gameMenuScene);
     app.stage.addChild(gameOverScene);
-    app.stage.addChild(gameSpellScene);
 }
 
-function resetGame(gameMenuScene, gameOverScene) {
+function resetGame(scenes) {
     return () => {
         console.log("reset game");
     
-        gameMenuScene.visible = false;
-        gameOverScene.visible = false;
+        scenes.gameMenuScene.visible = false;
+        scenes.gameOverScene.visible = false;
         const gameScene = new PIXI.Container();
     
         const mainContainer = new PIXI.Container();
@@ -74,13 +75,23 @@ function resetGame(gameMenuScene, gameOverScene) {
         const wizardDisplayGroup = new PIXI.display.Group(5, false);
         gameScene.addChild(new PIXI.display.Layer(wizardDisplayGroup));
     
+
+        const ouijaDisplayGroup = new PIXI.display.Group(9, false);
+        gameScene.addChild(new PIXI.display.Layer(ouijaDisplayGroup));
+        // ouijaDisplayGroup.visible = false;
+        scenes.gameSpellScene.parentGroup = ouijaDisplayGroup;
+        mainContainer.addChild(scenes.gameSpellScene);
+
         const uiDisplayGroup = new PIXI.display.Group(10, false);
         gameScene.addChild(new PIXI.display.Layer(uiDisplayGroup));
-    
-        const room = createRooms(backgroundDisplayGroup, mainContainer);
+        
+        scenes.gameScene  = gameScene;
+
+        const room = createRooms(backgroundDisplayGroup, mainContainer, scenes);
         room.background.on('pointerdown', onClickWalk);
         room.rightRoom.background.on('pointerdown', onClickWalk);
         room.leftRoom.background.on('pointerdown', onClickWalk);
+        room.ceiling.background.on('pointerdown', onClickWalk);
         room.render();
     
         //we now show here the background and items. Order matters
@@ -90,23 +101,21 @@ function resetGame(gameMenuScene, gameOverScene) {
         wizard = new Wizard("images/wizardv2.json", wizardDisplayGroup, mainContainer);
         countDown = new Countdown(uiDisplayGroup, mainContainer);
         
-        const gameCallback = () => {
+        const gameLoop = () => {
             wizard.checkWizardWalk(clickX);
             countDown.refresh();
             if (countDown.isOverTime()) {
                 countDown.sound.stop();
                 gameScene.visible = false;
-                gameOverScene.visible = true;
+                scenes.gameSpellScene.visible = false;
+
+                scenes.gameOverScene.visible = true;
             }
         }
         //we create the "clock" with delta value, that will refresh the stuff
         app.stage.addChild(gameScene);
-        app.ticker.add(delta => gameLoop(delta, gameCallback));
+        app.ticker.add(gameLoop);
     }
-}
-
-function gameLoop(delta, gameCallback) {
-    gameCallback();
 }
 
 function onClickWalk () {

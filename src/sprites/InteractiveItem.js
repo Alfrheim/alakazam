@@ -1,11 +1,12 @@
 import quests from '@/Quests';
 
 class InteractiveItem extends PIXI.Sprite {
-    constructor(description, resource, quest, itemType) {
+    constructor(description, resource, quest, itemType, scenes = null) {
         super(resource);
         this.description = description;
         this.quest = quest;
         this.itemType = itemType;
+        this.scenes = scenes;
     }
 
     interactWith(eventData) {
@@ -26,6 +27,7 @@ class InteractiveItem extends PIXI.Sprite {
             case "ouija":
                 if(quests.ouijaPieceFound) {
                     console.log("gameSpellScene GO!");
+                    this.scenes.gameSpellScene.visible = true;
                 } else {
                     //TODO show this message on screen only for few seconds, or hide it next time we click somewhere?
                     let ouijaText = new PIXI.Text(this.description,{fontFamily : 'Verdana', fontSize: 15, fill : 0xff1010, align : 'center', strokeThickness: 10} );
