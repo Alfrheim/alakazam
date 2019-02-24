@@ -2,6 +2,7 @@ import Wizard from '@/sprites/Wizard';
 import Countdown from '@/Countdown';
 import createUI from '@/sprites/UI';
 import createRooms from '@/roomManager';
+import buildScenes from '@/scenes';
 import '@/css/index.css'
 
 
@@ -18,11 +19,6 @@ document.body.appendChild(app.view);
 let clickX = 0;     //global variable to store direction of walking +/-
 let wizard;        //global variable where we will store class of wizard
 let countDown;
-let gameScene;
-let gameOverScene;
-let gameSpellScene;
-let gameWonScene;
-let gameMenuScene;
 let showIntro=true;
 
 //we load here all images to catch them
@@ -42,62 +38,29 @@ PIXI.loader
     .on("progress", loadProgressHandler)
     .load(setup);
 
-function loadProgressHandler(resource) {
+function loadProgressHandler() {
     console.log("progress: " + PIXI.loader.progress + "%");
 }
 
 function setup() {
     app.stage = new PIXI.display.Stage();
-
-    gameMenuScene = new PIXI.Container();
-    let menuNameText = new PIXI.Text("Game Name",{fontFamily : 'Verdana', fontSize: 42, fill : 0xff1010, align : 'center', strokeThickness: 10} );
-    let menuStartText = new PIXI.Text("Click/tap to start",{fontFamily : 'Verdana', fontSize: 24, fill : 0xff1010, align : 'center', strokeThickness: 10} );
-    menuNameText.x = app.view.width/2;
-    menuNameText.y = app.view.height/2;
-    menuNameText.anchor.x = 0.5;
-    menuNameText.anchor.y = 0.5;
-    menuStartText.x = app.view.width/2;
-    menuStartText.y = app.view.height/2 + 100;
-    menuStartText.anchor.x = 0.5;
-    menuStartText.anchor.y = 0.5;
-    gameMenuScene.addChild(menuNameText);
-    gameMenuScene.addChild(menuStartText);
-    gameMenuScene.interactive = true;
-    gameMenuScene.on('pointerdown', resetGame);
-
-    gameOverScene = new PIXI.Container();
-    let gameOverText = new PIXI.Text("Game Over",{fontFamily : 'Verdana', fontSize: 42, fill : 0xff1010, align : 'center', strokeThickness: 10} );
-    let tryAgainText = new PIXI.Text("Click/tap to try again",{fontFamily : 'Verdana', fontSize: 24, fill : 0xff1010, align : 'center', strokeThickness: 10} );
-    gameOverText.x = app.view.width/2;
-    gameOverText.y = app.view.height/2;
-    gameOverText.anchor.x = 0.5;
-    gameOverText.anchor.y = 0.5;
-    tryAgainText.x = app.view.width/2;
-    tryAgainText.y = app.view.height/2 + 100;
-    tryAgainText.anchor.x = 0.5;
-    tryAgainText.anchor.y = 0.5;
-    gameOverScene.addChild(gameOverText);
-    gameOverScene.addChild(tryAgainText);
-    gameOverScene.interactive = true;
-    gameOverScene.visible = false;
-    gameOverScene.on('pointerdown', resetGame);
-
-    gameSpellScene = new PIXI.Container();
-    let spellBackground = new PIXI.Sprite(PIXI.loader.resources["images/spell.png"].texture);
-    gameSpellScene.addChild(spellBackground);
-    gameSpellScene.visible = false;
+    const { gameMenuScene, gameOverScene, gameSpellScene } = buildScenes(app);
+    const resetGameCallback = resetGame.bind(this, gameMenuScene, gameOverScene)
+    
+    gameMenuScene.on('pointerdown', resetGameCallback);
+    gameOverScene.on('pointerdown', resetGameCallback);
     
     app.stage.addChild(gameMenuScene);
     app.stage.addChild(gameOverScene);
     app.stage.addChild(gameSpellScene);
 }
 
-function resetGame() {
+function resetGame(gameMenuScene, gameOverScene) {
     console.log("reset game");
     
     gameMenuScene.visible = false;
     gameOverScene.visible = false;
-    gameScene = new PIXI.Container();
+    const gameScene = new PIXI.Container();
 
     const mainContainer = new PIXI.Container();
     gameScene.addChild(mainContainer);
@@ -123,21 +86,24 @@ function resetGame() {
 
     wizard = new Wizard("images/wizard.json", wizardDisplayGroup, mainContainer);
     countDown = new Countdown(uiDisplayGroup, mainContainer);
-
+    
+    const gameCallback = () => {
+        wizard.checkWizardWalk(clickX);
+        countDown.refresh();
+        if (countDown.isOverTime()) {
+            countDown.sound.stop();
+            gameScene.visible = false;
+            gameOverScene.visible = true;
+        }
+    }
     //we create the "clock" with delta value, that will refresh the stuff
     app.stage.addChild(gameScene);
-    app.ticker.add(delta => gameLoop(delta));
+    app.ticker.add(delta => gameLoop(delta, gameCallback));
 
 }
 
-function gameLoop(delta) {
-    wizard.checkWizardWalk(clickX);
-    countDown.refresh();
-    if (countDown.isOverTime()) {
-        countDown.sound.stop();
-        gameScene.visible = false;
-        gameOverScene.visible = true;
-    }
+function gameLoop(delta, gameCallback) {
+    gameCallback();
 }
 
 function onClickWalk () {
