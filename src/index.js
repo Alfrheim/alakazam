@@ -2,6 +2,7 @@ import Wizard from '@/sprites/Wizard';
 import Countdown from '@/Countdown';
 import createUI from '@/sprites/UI';
 import createRooms from '@/roomManager';
+//import GameState from '@/GameState';
 import '@/css/index.css'
 import {Howl, Howler} from 'howler';
 
@@ -19,6 +20,10 @@ document.body.appendChild(app.view);
 let clickX = 0;     //global variable to store direction of walking +/-
 let wizard;        //global variable where we will store class of wizard
 let countDown;
+let gameScene;
+let gameOverScene;
+let gameWonScene;
+let gameMenuScene;
 
 //we load here all images to catch them
 PIXI.loader
@@ -34,16 +39,37 @@ PIXI.loader
     .add("images/book-page.png")
     .add('fonts/gullhorn.ttf')
     .on("progress", loadProgressHandler)
-    .load(setup);
+    .load(menu);
 
 function loadProgressHandler(resource) {
     console.log("progress: " + PIXI.loader.progress + "%");
 }
 
-function setup() {
-    console.log("setup");
-    
+function menu() {
     app.stage = new PIXI.display.Stage();
+
+    gameMenuScene = new PIXI.Container();
+    let menuNameText = new PIXI.Text("Game Name",{fontFamily : 'Verdana', fontSize: 42, fill : 0xff1010, align : 'center', strokeThickness: 10} );
+    let menuStartText = new PIXI.Text("Click/tap to start",{fontFamily : 'Verdana', fontSize: 24, fill : 0xff1010, align : 'center', strokeThickness: 10} );
+    menuNameText.x = app.view.width/2;
+    menuNameText.y = app.view.height/2;
+    menuNameText.anchor.x = 0.5;
+    menuNameText.anchor.y = 0.5;
+    menuStartText.x = app.view.width/2;
+    menuStartText.y = app.view.height/2 + 100;
+    menuStartText.anchor.x = 0.5;
+    menuStartText.anchor.y = 0.5;
+    gameMenuScene.addChild(menuNameText);
+    gameMenuScene.addChild(menuStartText);
+    gameMenuScene.interactive = true;
+    gameMenuScene.on('pointerdown', setupGame);
+    app.stage.addChild(gameMenuScene);
+}
+
+function setupGame() {
+    console.log("setup");
+    gameMenuScene.visible = false;
+    //app.stage = new PIXI.display.Stage();
     var mainContainer = new PIXI.Container();
     app.stage.addChild(mainContainer);
 
@@ -95,3 +121,5 @@ function onClickWalk () {
     clickX = click.x;
     wizard.walk(clickX);  
 }
+
+export {setupGame};
