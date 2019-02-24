@@ -6,7 +6,7 @@ class Countdown {
     constructor(displayGroup, container) {
         this.timeLeft = INITIAL_TIME;
         this.timer = new Date().getTime()+ this.timeLeft;
-        console.log(this.timer);
+        //console.log(this.timer);
         this.clock = new PIXI.Text(this.timer,{fontFamily : 'Verdana', fontSize: 24, fill : 0xff1010, align : 'center', strokeThickness: 10} );
         this.clock.x = 350;
 
@@ -26,7 +26,7 @@ class Countdown {
     refresh() {
         this.timeLeft = this.timer - new Date().getTime();
         let textToShow = this.timeLeft / 1000 | 0;
-        console.log(this.timeLeft + " and 60% " + 60 * INITIAL_TIME / 100 );
+        //console.log(this.timeLeft + " and 60% " + 60 * INITIAL_TIME / 100 );
         if(this.isInCalmTime()) {
             this.clock.style['fill'] = 'green';
 

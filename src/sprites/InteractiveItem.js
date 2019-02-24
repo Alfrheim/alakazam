@@ -25,8 +25,15 @@ class InteractiveItem extends PIXI.Sprite {
                 break;
             case "ouija":
                 if(quests.ouijaPieceFound) {
-                    console.log("Now to do the spellcastingggg");
+                    console.log("gameSpellScene GO!");
                 } else {
+                    //TODO show this message on screen only for few seconds, or hide it next time we click somewhere?
+                    let ouijaText = new PIXI.Text(this.description,{fontFamily : 'Verdana', fontSize: 15, fill : 0xff1010, align : 'center', strokeThickness: 10} );
+                    ouijaText.anchor.x = 0.5;
+                    ouijaText.x = eventData.target.x - 50;
+                    ouijaText.y = eventData.target.y - 50;
+                    ouijaText.parentGroup = eventData.target.parentGroup;
+                    eventData.target.parent.addChild(ouijaText);
                     console.log(this.description);
                 }
                 break;

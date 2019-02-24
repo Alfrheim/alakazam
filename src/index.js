@@ -20,6 +20,7 @@ let wizard;        //global variable where we will store class of wizard
 let countDown;
 let gameScene;
 let gameOverScene;
+let gameSpellScene;
 let gameWonScene;
 let gameMenuScene;
 
@@ -29,6 +30,7 @@ PIXI.loader
     .add("images/fireplace.png")
     .add("images/livingroom.png")
     .add("images/kitchen.png")
+    .add("images/spell.png")
     .add("images/mug.png")
     .add("images/ouijawb_small.png")
     .add("images/chest.png")
@@ -79,12 +81,19 @@ function setup() {
     gameOverScene.visible = false;
     gameOverScene.on('pointerdown', resetGame);
 
+    gameSpellScene = new PIXI.Container();
+    let spellBackground = new PIXI.Sprite(PIXI.loader.resources["images/spell.png"].texture);
+    gameSpellScene.addChild(spellBackground);
+    gameSpellScene.visible = false;
+    
     app.stage.addChild(gameMenuScene);
     app.stage.addChild(gameOverScene);
+    app.stage.addChild(gameSpellScene);
 }
 
 function resetGame() {
-    console.log("setup");
+    console.log("reset game");
+    
     gameMenuScene.visible = false;
     gameOverScene.visible = false;
     gameScene = new PIXI.Container();

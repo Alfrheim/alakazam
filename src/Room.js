@@ -20,10 +20,6 @@ class Room {
         item.on('pointerdown', item.interactWith);
         this.interactiveItems.push(item);
     }
-
-    removeInteractiveItem(item) {
-        
-    }
     
     addWalls (rightRoom, leftRoom){
         this.leftRoom = leftRoom;
