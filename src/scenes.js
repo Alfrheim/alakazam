@@ -23,6 +23,10 @@ function createIntroVideoScene(app){
    // create a new Sprite using the video texture (yes it's that easy)
    let videoSprite = new PIXI.Sprite(texture);
 
+   videoSprite.preload = 'auto';
+	videoSprite.loop = false;
+   videoSprite.height=600;
+
    //adding video sprite to the container
    gameIntroVideoScene.addChild(videoSprite);
 
