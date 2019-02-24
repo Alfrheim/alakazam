@@ -40,8 +40,12 @@ class InteractiveItem extends PIXI.Sprite {
                     ouijaText.x = eventData.target.x - 50;
                     ouijaText.y = eventData.target.y - 50;
                     ouijaText.parentGroup = eventData.target.parentGroup;
+                    ouijaText.visible=true;
                     eventData.target.parent.addChild(ouijaText);
                     console.log(this.description);
+                    setTimeout(() => {
+                        ouijaText.visible=false;
+                    }, 1500);
                 }
                 break;
             case "open":
