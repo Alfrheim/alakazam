@@ -21,9 +21,10 @@ class Room {
         this.interactiveItems.push(item);
     }
     
-    addWalls (rightRoom, leftRoom){
+    addWalls (rightRoom, leftRoom, ceiling){
         this.leftRoom = leftRoom;
         this.rightRoom = rightRoom;
+        this.ceiling = ceiling;
 
         const rightWall = new PIXI.Graphics();
         rightWall.lineStyle(5, 0xFFFFFF, 1);
@@ -74,8 +75,33 @@ class Room {
             this.alpha = 0;
         }
 
+        if (ceiling){
+            const ceilingWall = new PIXI.Graphics();
+            ceilingWall.lineStyle(5, 0xFFFFFF, 1);
+            ceilingWall.beginFill(0x0000FF, 1);
+            ceilingWall.drawCircle(85, 0, 10);
+            ceilingWall.endFill();
+            ceilingWall.alpha = 0; //this should be zero, so is not visible until hoving over
+            ceilingWall.interactive = true;
+            ceilingWall.buttonMode = true;
+            ceilingWall.hitArea = new PIXI.Circle(85,0,10);   //expandir a la mateixa area del rectangle
+            this.interactiveItems.push(ceilingWall);
+            ceilingWall.nextRoom = "up";
+            //makes area semi-transparent when mouse over
+            ceilingWall.mouseover = function(mouseData) {
+                this.alpha = 0.3;
+            }
+            // make area transparent when mouse leaves - but it should be transparent
+            ceilingWall.mouseout = function(mouseData) {
+                this.alpha = 0;
+            }
+            ceilingWall.on('pointerdown', this.goToRoom);
+        }
+        
+
         leftWall.on('pointerdown', this.goToRoom);
         rightWall.on('pointerdown', this.goToRoom);
+        
     }
 
     render() {
@@ -97,9 +123,14 @@ class Room {
         if (eventData.target.nextRoom == "left") {
             this.leftRoom.render();
         } else {
-            this.rightRoom.render();
+            if (eventData.target.nextRoom == "up") 
+            { 
+                this.ceiling.render();
+            }  
+            else {
+                this.rightRoom.render();
+            }
         }
-        
     }
 }
 export default Room;

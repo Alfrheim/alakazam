@@ -14,10 +14,13 @@ function createRooms(displayGroup, container) {
     let room3 = new Room("images/kitchen.png", container, displayGroup);
     room3.addInteractiveItem("images/mug.png", 300, 200, "This is a mug", 5);
     room3.addInteractiveItem("images/book-fireplace.png", 100, 100, "this is a book", 1);
+
+    let roomUp = new Room("images/believe.jpg", container, displayGroup);
     
-    room.addWalls(room3,room2);
+    room.addWalls(room3,room2,roomUp);
     room2.addWalls(room,room3);
     room3.addWalls(room2,room);
+    roomUp.addWalls(room,room);
 
     return room;
 }
