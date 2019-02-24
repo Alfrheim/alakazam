@@ -73,12 +73,12 @@ function createGameMenuScene(app) {
    const gameMenuScene = new PIXI.Container();
    let menuNameText = new PIXI.Text("Alakazam\n A Spellcraft guide", { fontFamily: 'Gullhornet', fontSize: 42, fill: 0xff1010, align: 'center', strokeThickness: 10 });
    let menuStartText = new PIXI.Text("Click/tap to start", { fontFamily: 'Verdana', fontSize: 24, fill: 0xff1010, align: 'center', strokeThickness: 10 });
-   menuNameText.x = app.view.width / 6;
-   menuNameText.y = app.view.height / 6;
+   menuNameText.x = (app.view.width / 6) + 70;
+   menuNameText.y = 60;
    menuNameText.anchor.x = 0.5;
    menuNameText.anchor.y = 0.5;
-   menuStartText.x = app.view.width / 6;
-   menuStartText.y = app.view.height / 7 + 100;
+   menuStartText.x = (app.view.width / 6) + 70;
+   menuStartText.y = 150;
    menuStartText.anchor.x = 0.5;
    menuStartText.anchor.y = 0.5;
    gameMenuScene.addChild(menuNameText);
