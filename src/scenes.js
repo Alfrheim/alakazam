@@ -2,15 +2,17 @@ export default (app) => {
     const gameMenuScene = createGameMenuScene(app);
     const gameOverScene = createGameOverScene(app);
     const gameSpellScene = createSpellScene(app);
-    const gameOuijaScene = createOuijaScene(app);
     const gameIntroVideoScene = createIntroVideoScene(app);
+    const gameEndScene = createEndGameScene(app);
+    const gameOuijaScene = createOuijaScene(app);
 
     return {
         gameMenuScene,
         gameOverScene,
         gameSpellScene,
         gameIntroVideoScene,
-        gameOuijaScene
+        gameOuijaScene,
+        gameEndScene
     }
 }
 
@@ -41,8 +43,24 @@ function createSpellScene(app) {
    return gameSpellScene;
 }
 
+function createEndGameScene(app) {
+   let gameWinText = new PIXI.Text("The Angel is gone. \n We'll not hear its voice but\n we will continue roaming its glorious land for a while more...", { fontFamily: 'Verdana', fontSize: 42, fill: 0xff1010, align: 'center', strokeThickness: 10 });
+   gameWinText.x = 0;
+   gameWinText.y = 50;
+   // gameWinText.anchor.x = 1;
+   // gameWinText.anchor.y = 1;
+   gameWinText.width = 750;
+   
+   const endGameScene = new PIXI.Container();
+   const endGameBackground = new PIXI.Sprite(PIXI.loader.resources["images/gameover.png"].texture);
+   endGameScene.addChild(endGameBackground);
+   endGameScene.addChild(gameWinText);
+   
+   endGameScene.visible = false;
+   return endGameScene;
+}
 
-function createOuijaScene(app, gameScene, winScene) {
+function createOuijaScene(app) {
     const ouijaSpellScene = new PIXI.Container();
     let ouijaBackground = new PIXI.Sprite(PIXI.loader.resources["images/ouijawb.png"].texture);
     let questionText = new PIXI.Text("So, what do you say?", { fontFamily: 'Verdana', fontSize: 42, fill: 0xff1010, align: 'center', strokeThickness: 10 });
@@ -88,7 +106,7 @@ function createOuijaScene(app, gameScene, winScene) {
             // characterContainer.tint = Math.random() * 0xFFFFFF;
 
             if(order === 4) {
-               alert('You win the game')
+               global.countDown.endGame();
             }
          } else {
             order = 0;
@@ -105,7 +123,9 @@ function createOuijaScene(app, gameScene, winScene) {
 }
 
 function createGameOverScene(app) {
+   const endGameBackground = new PIXI.Sprite(PIXI.loader.resources["images/gameover.png"].texture);
    const gameOverScene = new PIXI.Container();
+   gameOverScene.addChild(endGameBackground);
    let gameOverText = new PIXI.Text("Game Over", { fontFamily: 'Verdana', fontSize: 42, fill: 0xff1010, align: 'center', strokeThickness: 10 });
    let tryAgainText = new PIXI.Text("Click/tap to try again", { fontFamily: 'Verdana', fontSize: 24, fill: 0xff1010, align: 'center', strokeThickness: 10 });
    gameOverText.x = app.view.width / 6;

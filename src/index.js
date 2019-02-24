@@ -18,7 +18,7 @@ document.body.appendChild(app.view);
 
 let clickX = 0;     //global variable to store direction of walking +/-
 let wizard;        //global variable where we will store class of wizard
-let countDown;
+global.countDown;
 let intro=true;
 
 //we load here all images to catch them
@@ -41,6 +41,7 @@ PIXI.loader
     .add("images/book.png")
     .add("images/book-page.png")
     .add("images/ouijawb.png")
+    .add("images/gameover.png")
     .add('fonts/gullhorn.ttf')
     .on("progress", loadProgressHandler)
     .load(setup);
@@ -52,7 +53,7 @@ function loadProgressHandler() {
 function setup() {
     app.stage = new PIXI.display.Stage();
     const scenes = buildScenes(app);
-    const { gameIntroVideoScene, gameMenuScene, gameOverScene, gameSpellScene, gameOuijaScene } = scenes;
+    const { gameIntroVideoScene, gameMenuScene, gameOverScene, gameEndScene, gameSpellScene, gameOuijaScene } = scenes;
     const resetGameCallback = resetGame(scenes);
     
     gameMenuScene.on('pointerdown', resetGameCallback);
@@ -69,6 +70,7 @@ function setup() {
     }
     app.stage.addChild(gameMenuScene);
     app.stage.addChild(gameOverScene);
+    app.stage.addChild(gameEndScene);
 }
 
 function resetGame(scenes) {
@@ -115,17 +117,21 @@ function resetGame(scenes) {
         createUI(uiDisplayGroup, mainContainer);
     
         wizard = new Wizard("images/wizardv2.json", wizardDisplayGroup, mainContainer);
-        countDown = new Countdown(uiDisplayGroup, mainContainer);
+        global.countDown = new Countdown(uiDisplayGroup, mainContainer);
         
         const gameLoop = () => {
             wizard.checkWizardWalk(clickX);
-            countDown.refresh();
-            if (countDown.isOverTime()) {
-                countDown.sound.stop();
+            global.countDown.refresh();
+            if (global.countDown.isOverTime()) {
+                global.countDown.sound.stop();
                 gameScene.visible = false;
                 scenes.gameSpellScene.visible = false;
 
                 scenes.gameOverScene.visible = true;
+            } else if(global.countDown.isEndGame) {
+                gameScene.visible = false;
+                scenes.gameIntroVideoScene.visible = false;
+                scenes.gameEndScene.visible = true;
             }
         }
         //we create the "clock" with delta value, that will refresh the stuff

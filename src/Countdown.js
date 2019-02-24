@@ -124,6 +124,11 @@ class Countdown {
         });
         return result;
     }
+
+    endGame() {
+        this.sound.stop();
+        this.isEndGame = true;
+    }
 }
 
 
