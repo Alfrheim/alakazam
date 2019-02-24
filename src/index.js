@@ -19,6 +19,7 @@ document.body.appendChild(app.view);
 let clickX = 0;     //global variable to store direction of walking +/-
 let wizard;        //global variable where we will store class of wizard
 let countDown;
+let intro=true;
 
 //we load here all images to catch them
 PIXI.loader
@@ -39,6 +40,7 @@ PIXI.loader
     .add("images/book.png")
     .add("images/book-fireplace.png")
     .add("images/book-page.png")
+    .add("images/ouijawb.png")
     .add('fonts/gullhorn.ttf')
     .on("progress", loadProgressHandler)
     .load(setup);
@@ -50,13 +52,21 @@ function loadProgressHandler() {
 function setup() {
     app.stage = new PIXI.display.Stage();
     const scenes = buildScenes(app);
-    const { gameIntroVideoScene, gameMenuScene, gameOverScene, gameSpellScene } = scenes;
+    const { gameIntroVideoScene, gameMenuScene, gameOverScene, gameSpellScene, gameOuijaScene } = scenes;
     const resetGameCallback = resetGame(scenes);
     
     gameMenuScene.on('pointerdown', resetGameCallback);
     gameOverScene.on('pointerdown', () => window.location.reload());
     
-    app.stage.addChild(gameIntroVideoScene);
+    if (intro)
+    {
+        intro=false;
+        app.stage.addChild(gameIntroVideoScene);
+    }
+    else{ 
+        
+        app.stage.removeChild(gameIntroVideoScene);
+    }
     app.stage.addChild(gameMenuScene);
     app.stage.addChild(gameOverScene);
 }
@@ -82,9 +92,12 @@ function resetGame(scenes) {
 
         const ouijaDisplayGroup = new PIXI.display.Group(9, false);
         gameScene.addChild(new PIXI.display.Layer(ouijaDisplayGroup));
-        // ouijaDisplayGroup.visible = false;
+
         scenes.gameSpellScene.parentGroup = ouijaDisplayGroup;
         mainContainer.addChild(scenes.gameSpellScene);
+
+        scenes.gameOuijaScene.parentGroup = ouijaDisplayGroup;
+        mainContainer.addChild(scenes.gameOuijaScene);
 
         const uiDisplayGroup = new PIXI.display.Group(10, false);
         gameScene.addChild(new PIXI.display.Layer(uiDisplayGroup));
