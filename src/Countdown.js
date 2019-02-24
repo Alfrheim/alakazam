@@ -126,7 +126,7 @@ class Countdown {
     }
 
     endGame() {
-        this.sound.stop();
+        this.sound.mute();
         this.isEndGame = true;
     }
 }
