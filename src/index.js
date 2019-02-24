@@ -56,10 +56,11 @@ function setup() {
     
     if (intro)
     {
-    app.stage.addChild(gameIntroVideoScene);
+        intro=false;
+        app.stage.addChild(gameIntroVideoScene);
     }
     else{ 
-        intro=false;
+        
         app.stage.removeChild(gameIntroVideoScene);
     }
     app.stage.addChild(gameMenuScene);
