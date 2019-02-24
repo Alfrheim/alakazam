@@ -1,6 +1,6 @@
 import {Howl, Howler} from 'howler';
 
-const INITIAL_TIME = 5 * 60000;
+const INITIAL_TIME = 0.25 * 60000;
 
 class Countdown {
 
@@ -123,6 +123,11 @@ class Countdown {
             volume: 5.0,
         });
         return result;
+    }
+
+    endGame() {
+        this.sound.stop();
+        this.isEndGame = true;
     }
 }
 

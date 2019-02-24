@@ -25,7 +25,6 @@ class InteractiveItem extends PIXI.Sprite {
                 });
                 break;
             case "ouija":
-                quests.ouijaPieceFound = true;
                 if(quests.ouijaPieceFound) {
                     console.log("gameSpellScene GO!");
                     this.scenes.gameSpellScene.visible = true;
