@@ -19,6 +19,7 @@ document.body.appendChild(app.view);
 let clickX = 0;     //global variable to store direction of walking +/-
 let wizard;        //global variable where we will store class of wizard
 let countDown;
+let intro=true;
 
 //we load here all images to catch them
 PIXI.loader
@@ -52,7 +53,14 @@ function setup() {
     gameMenuScene.on('pointerdown', resetGameCallback);
     gameOverScene.on('pointerdown', () => window.location.reload());
     
+    if (intro)
+    {
     app.stage.addChild(gameIntroVideoScene);
+    }
+    else{ 
+        intro=false;
+        app.stage.removeChild(gameIntroVideoScene);
+    }
     app.stage.addChild(gameMenuScene);
     app.stage.addChild(gameOverScene);
 }
