@@ -29,7 +29,7 @@ function createUI(displayGroup, container) {
                 });
 
             if (quests.allTranslated()) {
-                let finalText = new PIXI.Text("Ueeeeee",{fontFamily : 'Verdana', fontSize: 24, fill : 0xff1010, align : 'center', strokeThickness: 10} );
+                let finalText = new PIXI.Text("comunication is \npossible now...",{fontFamily : 'Verdana', fontSize: 24, fill : 0xff1010, align : 'center', strokeThickness: 10} );
                 finalText.x = 210;
                 finalText.y = todoTextY + 50;
                 bookPage.addChild(finalText);

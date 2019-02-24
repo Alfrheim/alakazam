@@ -6,16 +6,12 @@ class Quests {
         this.translatedQuests = 0;
         this.ouijaPieceFound = false;
         this.quests = [
-            new Quest(1, "Find a blue potion", false),
-            new Quest(2, "Not Implemented", false),
-            new Quest(3, "Not Implemented", false),
-            new Quest(4, "Not Implemented", false),
-            new Quest(5, "Not Implemented", false),
-            new Quest(6, "Not Implemented", false),
-            //new Quest(7, "Not Implemented", false),
-            //new Quest(8, "Not Implemented", false),
-            //new Quest(9, "Not Implemented", false),
-            //new Quest(10, "Not Implemented", false)
+            new Quest(1, "Time in its realm", false),
+            new Quest(2, "all of us humanity", false),
+            new Quest(3, "... my Choir", false),
+            new Quest(4, "Silence in its arms", false),
+            new Quest(5, "he was an Angel", false),
+            new Quest(6, "made me disappear", false)
         ];
     }
 
